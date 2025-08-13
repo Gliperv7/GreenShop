@@ -1,0 +1,164 @@
+@import url("styles/header.css");
+@import url("styles/footer.css");
+@font-face {
+    font-family: 'CeraPro';
+    src: url('fonts/CeraPro-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CeraProBold';
+    src: url('fonts/CeraPro-Bold.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CeraProBlack';
+    src: url('fonts/CeraPro-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+body{
+    font-family: "CeraPro", sans-serif;
+}
+.Home_link{
+    margin: 0 50px 0 250px;
+    white-space: nowrap;
+    font-size: 15px;
+}
+.Home_link a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.slider{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 50px 0 0 200px;
+}
+.big_images{
+    display: flex;
+    margin: -400px 0 0 450px;
+}
+#border{
+    border: 1px solid #46A358;
+}
+#vector{
+    width: 15px;
+    height: 15px;
+}
+.text-and-info{
+    display: flex;
+    gap: 5px;
+    margin: -460px 0 500px 1000px;
+}
+.Text-top h1{
+    white-space: nowrap;
+}
+.slider_stars{
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    gap: 5px;
+    margin:  0 0 0 340px;
+}
+.slider_stars h4 {
+    margin: 0 ;
+    font-size: 15px;
+    font-weight: 400;
+    color: #3D3D3D;
+}
+.slider_stars img{
+    width: 15px;
+    height: 15px;
+
+}
+
+
+
+.text-and-info h1{
+    font-size: 28px;
+}
+.Text-top p {
+    margin: 0 0 -33px 0;
+    color: #46A358;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(70, 163, 88, 0.49);
+    padding-bottom: 10px;
+}
+
+.text_and_bottoms{
+
+    margin: 110px 0 0 -585px;
+}
+.text_and_bottom h4{
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+.text_and_bottoms p{
+    width: 573px;
+    height: 66px;
+    color: #727272;
+    font-size: 14px;
+    line-height: 24px;
+}
+.side{
+    display: flex;
+    margin: 300px 0 0 -45px;
+    width: 28px;
+    height: 28px;
+}
+.side img {
+    width: 28px;
+    height: 28px;
+}
+.side button{
+    border: none;
+    outline: none;
+}
+#Side {
+    margin: 265px 0 0 -580px;
+}
+.need_Border{
+    border: 1px solid rgba(115, 115, 115, 0.41);
+    border-radius: 50%;
+}
+#green_icon{
+    border: 1px solid #46A358;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 500;
+    color: #46A358;
+    width: 11px;
+    height: 16px;
+    padding: 7px 10px;
+}
+.slider-preview-product{
+    display: flex;
+    gap: 10px;
+margin: 350px 0 0 -35px;
+    height: 60px;
+}
+.slider-preview-product p{
+    font-size: 20px;
+}
+.slider-preview-product button{
+    border: none;
+    outline: none;
+}
+.info_SKU {
+    white-space: nowrap;
+    margin: 410px 0 0 -480px;
+}
+.info_SKU p{
+    color: #727272;
+    font-size: 15px;
+}
+.info_SKU img{
+    font-size: 15px;
+    padding-left: 10px;
+}

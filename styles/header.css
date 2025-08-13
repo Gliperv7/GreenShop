@@ -8,7 +8,7 @@ nav a {
   text-decoration: none;
   color: black;
   display: inline-block;
-  padding: 0px 0px;
+  padding: 0 0;
   padding-bottom: 25px;
   font-size: 16px;
   border-bottom: 3px solid transparent;
@@ -35,7 +35,8 @@ nav a {
 }
 nav a.active {
   border-bottom-color: rgba(70, 163, 88, 1); /* меняем цвет линии */
-  font-weight: bold; 
+  font-weight: bold;
+    color: #46A358;
 }
 #Login{
   margin-bottom: -5px;
