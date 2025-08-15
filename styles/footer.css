@@ -13,6 +13,7 @@
 }
 .footer-subscribe h4{
   font-size: 18px;
+    padding: 10px 0;
 }
 .footer-subscribe p{
   color: rgba(114, 114, 114, 1);
@@ -30,6 +31,8 @@
   border-right: none;
   border-radius: 5px 0 0 5px;
   outline: none;
+    width:300px ;
+    height: 40px;
 }
 .footer-subscribe button {
   background: #46a358;
@@ -38,6 +41,7 @@
   padding: 0 20px;
   cursor: pointer;
   border-radius: 0 5px 5px 0;
+
 }
 #plant ,#watering{
   border-left:1px solid rgb(192, 192, 192);
@@ -54,29 +58,30 @@
   background-color: #46a35925;
 }
 .footer-midle div {
-  padding-right: 150px;
+  padding-right: 200px;
   font-size: 14px;
 }
 #Location{
-  width: 176px;
+  width: 400px;
   height: 44px;
+  line-height: 1.4;
 }
 .footer-bottom {
   display: flex;
-  justify-content: space-between; 
-  align-items: flex-start;        
-  flex-wrap: wrap;               
-  gap: 20px;                    
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 .footer-col {
-  min-width: 150px;               
+  min-width: 150px;
 }
 .footer_links_ct {
   display: flex;
   gap:250px ;
-  margin-left: 220px;
-  border-bottom: 1px solid #46a35979  ;  
- margin-bottom: 10px;
+  margin-left: 200px;
+  border-bottom: 1px solid #46a35979  ;
+padding-bottom: 30px;
  width: 1300px;
 }
 .footer_links_ct a{
@@ -86,9 +91,7 @@
 .footer_links_ct ul{
   list-style-type: none;
 }
-.myAccount ul , .helpGuide ul , .Categories ul{
-  margin-left: -40px;
-}
+
 .myAccount li , .helpGuide li , .Categories li {
   padding-top: 20px;
 }
@@ -98,9 +101,13 @@
   border-radius: 10px;
 }
 .Social-imges {
+
   padding-bottom: 50px;
 }
-.pinter img{
+.pinter{
+    white-space: nowrap;
+}
+ .pinter img{
   margin-left: -25px;
   margin-bottom: -5px;
 }
@@ -114,5 +121,21 @@
   align-items: center;
   color: #3D3D3D;
   font-size: 14px;
-  margin-left: -75px;
+    padding: 10px 0;
+
+}
+#number3 {
+    width: 174px;
+}
+#number1{
+    width: 189px;
+}
+#number2{
+    width: 202px;
+}
+#number4{
+    width: 169px;
+}
+.SocialMedia h4 {
+    padding: 0 0 20px 0;
 }

@@ -34,7 +34,7 @@ nav a {
   padding-top: 20px; 
 }
 nav a.active {
-  border-bottom-color: rgba(70, 163, 88, 1); /* меняем цвет линии */
+  border-bottom-color: rgba(70, 163, 88, 1);
   font-weight: bold;
     color: #46A358;
 }
