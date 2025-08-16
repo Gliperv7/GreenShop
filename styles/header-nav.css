@@ -5,8 +5,38 @@
     padding-top: 20px;
     position: relative;
     border-bottom: 1px solid #cce5cc;
-
 }
+
+
+nav a {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    padding: 0 0 22px 0;
+    font-size: 16px;
+    border-bottom: 3px solid transparent;
+}
+
+
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #cce5cc;
+}
+nav a.active {
+    border-bottom-color: rgba(70, 163, 88, 1);
+    font-weight: bold;
+    color: #46A358;
+}
+
+main{
+    width: 400px;
+}
+
+
 .header-nav  {
     display: flex;
     justify-content: space-between;
@@ -25,12 +55,12 @@
 .header-nav-list-item-link{
 
 }
-#home{
+.actives{
     position: relative;
     display: inline-block;
     font-weight: bold;
 }
-#home::after {
+.actives::after {
     content: '';
     position: absolute;
     left: 0;
