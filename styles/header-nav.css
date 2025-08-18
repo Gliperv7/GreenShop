@@ -59,15 +59,17 @@ main{
     position: relative;
     display: inline-block;
     font-weight: bold;
+
 }
 .actives::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -3px;
     width: 100%;
     height: 3px;
     background-color: rgba(70, 163, 88, 1);
 
 }
+
 

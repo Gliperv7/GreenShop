@@ -26,3 +26,17 @@
 .product-card p {
     text-align: justify;
 }
+.Group5 {
+    position: relative;
+}
+
+.Group5::before {
+    content: "";
+    display: inline-block;
+    width: 650px; /* отступ слева */
+}
+
+.Group5 img {
+    vertical-align: middle;
+    padding:0 0 100px 0 ;
+}
