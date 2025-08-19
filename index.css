@@ -1,15 +1,18 @@
+@import url("styles/vars.css");
 @import url("styles/reset.css");
 @import url("styles/footer.css");
 @import url("styles/product.css");
 @import url("styles/fonts.css");
 @import url("styles/header-nav.css");
-
+@import url("styles/product-section.css");
+@import url("styles/aside.css");
 
 body{
     font-family: "CeraPro", sans-serif ;
+    background-color: var(--primary-background);
 }
 .container1 {
-  max-width: 1400px;
+  max-width: var(--container-size);
   height: 450px;
   margin: 100px auto 200px 0;
   display: block;
@@ -55,16 +58,12 @@ width: 557px;
   margin-left: 880px;
   margin-top: 50px;
 }
-.main_group{
-  margin-top: -200px;
-  margin-left: 230px;
-}
 .main_text_wellcom span{
   color:#46A358 ;
 }
 .container2 {
   display: flex;
-  width: 1450px;
+  width: 900px;
     justify-content:flex-end;
 
     align-items: center;
@@ -78,38 +77,8 @@ width: 557px;
     padding-left: 350px;
     line-height: 15px;
 }
-.ul_categories1{
-  margin-left: 50px;
-}
-.Categories1 ul{
-  list-style-type: none;
-}
-.Categories1 li{
-  padding-top: 20px;
-}
-.ul_categories2{
-  margin-left:280px;
-  margin-top: -360px;
-    line-height: 20px;
-}
-.ul_categories3{
-  margin-left: 50px;
-  margin-top: 0;
-    padding-bottom: 30px;
-}
-.ul_categories4{
-  margin-left:280px;
-  margin-top: -150px;
-    padding-bottom: 30px;
-}
-.ul_categories2 li:first-child ,.ul_categories1 li:first-child {
-	color: #46A358;
-  font-weight: bold;
-}
-#prise{
-  padding: 50px;
-  margin-top: 0;
-}
+
+
 #text_short_first{
   color:#46A358 ;
   border-bottom: 2px solid #46A358 ;
@@ -118,23 +87,8 @@ width: 557px;
 }
 
 
-aside {
-  width: 310px;
-  flex-shrink: 0;
-  margin-left: 200px;
-}
-.main_group {
-  display: flex;
-  align-items: flex-start;
-  gap: 30px;
-}
-
-.swap img {
-height: 250px;
-}
 .border_flowers{
   border-top: 1px solid  #46A358;
-  width: 300px;
   border-radius: 0;
 }
 #Rectangle2{
@@ -143,11 +97,13 @@ height: 250px;
 .border_flowers img{
 height: 250px;
 }
+
 .PageNumber {
   display: flex;
+    padding: 75px;
+    justify-content: right;
   gap: 10px;
-  margin-left: 1300px;
-  margin-top: 50px;
+
 }
 .PageNumber a:first-child {
   color: #ffffff;
@@ -207,15 +163,16 @@ color: white;
 .Blogs_section{
   display: flex;
   gap: 50px;
-  margin-left: 300px;
+  margin:  auto 350px;
 }
 .text_head{
-  margin-left: 600px;
+
   white-space: nowrap;
-  margin-bottom: 60px;
+ padding: 60px;
+    text-align: center;
 }
 .text_head h1{
-  margin-left: 180px;
+
   font-size: 30px;
   font-weight: bold;
 }
@@ -227,6 +184,7 @@ color: white;
 }
 .More_info p{
     padding: 10px 0;
+    width: 260px;
 }
 .More_info a {
   text-decoration: none;
@@ -248,9 +206,10 @@ margin-bottom: -3px;
 
 
 .Home_link{
-    margin: 0 50px 0 250px;
     white-space: nowrap;
     font-size: 15px;
+    position: relative;
+    top: -30px;
 }
 .Home_link a {
     text-decoration: none;
@@ -260,13 +219,22 @@ margin-bottom: -3px;
 .slider{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     gap: 10px;
-    margin: 50px 0 0 200px;
+
+
+}
+.wrapper-product{
+    margin: 0 auto;
+   width: 1400px;
+
+    padding: 50px 0;
 }
 .big_images{
     display: flex;
-    margin: -400px 0 0 450px;
+    width: 404px;
+    height: 404px;
+    margin: -400px 0 0 200px;
 }
 #border{
     border: 1px solid #46A358;
@@ -277,8 +245,12 @@ margin-bottom: -3px;
 }
 .text-and-info{
     display: flex;
+    padding: 0 75px;
+    justify-content: center;
+    position: relative;
+    top: -50px;
     gap: 5px;
-    margin: -460px 0 0 1000px;
+
 }
 .Text-top h1{
     white-space: nowrap;
@@ -473,7 +445,10 @@ margin-bottom: -3px;
     align-items: center;
     padding: 10px;
     text-align: start;
+    width: 250px;
+    height: 320px;
 }
+
 .price{
     text-align: left;
 }

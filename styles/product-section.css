@@ -1,0 +1,18 @@
+.product-section{
+    width: var(--container-size);
+    margin: 0 auto;
+
+    min-height: 100vh;
+    display: flex;
+
+}
+.product-section .right{
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+.product-section-products{
+    flex: 1;
+    padding: 30px 0;
+}

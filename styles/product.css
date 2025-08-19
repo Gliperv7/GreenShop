@@ -2,9 +2,8 @@
     flex: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-left: 600px;
-    margin-top: -1100px;
+    gap: calc(var(--container-gap) * 2);
+
 }
 .product-card {
     border: 1px solid #eee;
@@ -33,7 +32,7 @@
 .Group5::before {
     content: "";
     display: inline-block;
-    width: 650px; /* отступ слева */
+    width: 650px;
 }
 
 .Group5 img {

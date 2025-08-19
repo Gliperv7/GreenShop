@@ -1,0 +1,31 @@
+
+.Categories1 ul{
+    list-style-type: none;
+}
+.ul_categories2{
+    line-height: 20px;
+}
+.ul_categories1 h4 , .ul_categories3 h4{
+    font-size: 18px;
+}
+
+.ul_categories2 li:first-child ,.ul_categories1 li:first-child {
+    color: #46A358;
+    font-weight: bold;
+}
+.categories-grid {
+    list-style: none;
+    margin: 0;
+}
+
+.categories-grid li {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    padding: 10px 0;
+}
+.Categories1{
+    padding: 0 0 0 75px;
+}
+#prise{
+    padding: 40px 0;
+}

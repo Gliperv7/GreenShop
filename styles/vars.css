@@ -1,0 +1,15 @@
+:root {
+    --primary-color: #46A358;
+    --secondary-color: #3D3D3D;
+    --tertiary-color: #CBCBCB;
+    --description-color: #727272;
+    --place-holder-color: #A5A5A5;
+    --warning-color: #F03800;
+
+    --primary-background: #FBFBFB;
+    --secondary-background: #CBCBCB;
+
+    --container-size: 1400px;
+    --container-gap: 15px;
+}
+
