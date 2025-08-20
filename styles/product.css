@@ -32,7 +32,7 @@
 .Group5::before {
     content: "";
     display: inline-block;
-    width: 650px;
+    width: calc(var(--container-weight));
 }
 
 .Group5 img {

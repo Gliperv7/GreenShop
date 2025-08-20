@@ -9,7 +9,9 @@
     --primary-background: #FBFBFB;
     --secondary-background: #CBCBCB;
 
-    --container-size: 1400px;
+    --container-size: 1500px;
     --container-gap: 15px;
+    --container-weight:650px;
+    --container-weight-medium:950px ;
 }
 
