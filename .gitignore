@@ -1,0 +1,41 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+
+# Build
+dist/
+build/
+.cache/
+.next/
+out/
+.tmp/
+coverage/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Mac / Linux / Windows system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
