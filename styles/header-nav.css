@@ -8,7 +8,7 @@
 }
 
 
-nav a {
+.header-nav-list-border a{
     text-decoration: none;
     color: black;
     display: inline-block;
@@ -50,9 +50,7 @@ nav a.active {
 .header-nav-list-item-link{
     font-size: 16px;
 }
-.header-nav-list-item-link{
 
-}
 .actives{
     position: relative;
     display: inline-block;

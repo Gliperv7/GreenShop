@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <title>product-cart</title>
+    <title>Green Shop</title>
 </head>
 <body>
 
 <header class="header">
     <nav class="header-nav">
-        <ul class="header-nav-list">
+        <ul class="header-nav-list header-nav-list-border">
             <li class="header-nav-list-item">
                 <a href="/index.html" class="header-nav-list-item-link">
                     <img src="images/Logo%20(2).png" alt="logo" class="header-nav-list-item-img">
                 </a>
             </li>
         </ul>
-        <ul class="header-nav-list">
+        <ul class="header-nav-list header-nav-list-border">
             <li class="header-nav-list-item">
                 <a href="/index.html" class="header-nav-list-item-link actives">
                     Home
@@ -47,9 +47,11 @@
                 </label>
             </li>
             <li class="header-nav-list-item">
-                <button class="header-nav-list-item-action">
-                    <img src="images/Group%201%20(1).png" alt="shop" class="header-nav-list-item-img">
-                </button>
+                <a href="product-cart.html" class="header-nav-list-item-link">
+                    <button class="header-nav-list-item-action">
+                        <img src="images/Group%201%20(1).png" alt="shop" class="header-nav-list-item-img">
+                    </button>
+                </a>
             </li>
             <li class="header-nav-list-item">
                 <button class="header-nav-list-item-action">
@@ -62,197 +64,165 @@
 
 
 <main>
-
-
-
     <section>
-        <div class="container1">
-            <div class="main_text_wellcom">
-                <img src="images/Welcome%20to%20GreenShop.png" alt="" id="h4main">
-                <img src="images/Let’s%20Make%20a%20Better%20Planet.png" alt="">
-                <p>We are an online plant shop offering a wide range of cheap and trendy plants. Use our plants to
-                    create a unique Urban Jungle. Order your favorite plants!</p>
+        <div class="wrapper-product">
+            <div class="header-nav header-nav--breadcrumbs">
+                <ul class="product-list">
+                    <li class="header-nav-list-item">
+                        <a href="/index.html" class="header-nav-list-item-link ">
+                            Home /
+                        </a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="/product.html" class="header-nav-list-item-link">
+                            Shop /
+                        </a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="/product.html" class="header-nav-list-item-link">
+                            Shopping Cart
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div id="tach_me"><a href="">SHOP NOW</a></div>
-            <div class="Group4"><img src="images/Group%204.png" alt=""></div>
-            <div><img src="images/01%202.png" alt="" id="Small"></div>
-            <div class="main_imges_plant"><img src="images/01%201.png" alt=""></div>
-        </div>
-    </section>
+            <div class="cart-container">
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="border-bottom">Products</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="product-info">
+                                <img src="images/small_images24.png" alt="daisy">
+                                <div>
+                                    <div class="product-name">Barberton Daisy</div>
+                                    <div class="sku">SKU: 1995751877966</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price-one">$119.00</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button>-</button>
+                                <span>2</span>
+                                <button>+</button>
+                            </div>
+                        </td>
+                        <td class="total-price">$238.00</td>
+                        <td class="trash"><img src="svg/Delete.svg" alt="delete"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-info">
+                                <img src="images/product5.png" alt="blushing">
+                                <div>
+                                    <div class="product-name">Blushing Bromeliad</div>
+                                    <div class="sku">SKU: 19957518757065</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price-one">$139.00</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button>-</button>
+                                <span>6</span>
+                                <button>+</button>
+                            </div>
+                        </td>
+                        <td class="total-price">$834.00</td>
+                        <td class="trash"><img src="svg/Delete.svg" alt="delete"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="product-info">
+                                <img src="images/product6.png" alt="plant">
+                                <div>
+                                    <div class="product-name">Aluminum Plant</div>
+                                    <div class="sku">SKU: 1995751877786</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price-one">$179.00</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button>-</button>
+                                <span>9</span>
+                                <button>+</button>
+                            </div>
+                        </td>
+                        <td class="total-price">$1,611.00</td>
+                        <td class="trash"><img src="svg/Delete.svg" alt="delete"></td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
-
-    <section class="product-section">
-        <div class="left">
-            <aside>
-                <div class="Categories1">
-
-                    <div class="ul_categories1">
-                        <h4>Categories</h4>
-                        <ul class="categories-grid">
-                            <li><span>House Plants</span> <span>(33)</span></li>
-                            <li><span>Potter Plants</span> <span>(12)</span></li>
-                            <li><span>Seeds</span> <span>(65)</span></li>
-                            <li><span>Small Plants</span> <span>(39)</span></li>
-                            <li><span>Big Plants</span><span>(23)</span></li>
-                            <li><span>Succulents</span><span>(17)</span></li>
-                            <li><span>Terrariums</span><span>(19)</span></li>
-                            <li><span>Gardening</span><span>(13)</span></li>
-                            <li><span>Accessories</span><span>(18)</span></li>
-                        </ul>
-                    </div>
-
-                    <img src="images/Group%207.png" alt="img" id="prise">
-
-                    <div class="Categories2">
-                        <div class="ul_categories3">
-                            <h4>Size</h4>
-                            <ul class="categories-grid">
-                                <li><span>Small</span><span>(119)</span></li>
-                                <li><span>Medium</span><span>(86)</span></li>
-                                <li><span>Large</span><span>(78)</span></li>
-                            </ul>
+                <div class="cart-totals">
+                    <h3>Cart Totals</h3>
+                    <div class="coupon">
+                        <label for="coupon-code" class="coupon-label">Coupon Apply</label>
+                        <div class="coupon-field">
+                            <input id="coupon-code" type="text" placeholder="Enter coupon code here..."
+                                   class="coupon-input">
+                            <button type="button" class="coupon-btn">Apply</button>
                         </div>
                     </div>
+
+                    <p><span>Subtotal</span><span>$2,683.00</span></p>
+                    <p><span>Coupon Discount</span><span>(-) 00.00</span></p>
+                    <p><span>Shipping</span><span>$16.00</span></p>
+                    <p class="grand-total"><span>Total</span><span>$2,699.00</span></p>
+                    <button class="checkout">Proceed To Checkout</button>
+                    <a href="#" class="continue">Continue Shopping</a>
                 </div>
-                <img src="images/Super%20Sale%20Banner.png" alt="input multirange" >
-            </aside>
+            </div>
 
 
         </div>
-        <div class="right">
-            <div class="product-section-filter">
-                <div class="container2">
-                    <div class="main_text_short">
-                        <p id="text_short_first">All Plants</p>
-                        <p>New Arrivals</p>
-                        <p>Sale</p>
-                        <p id="Short">Short by: Default sorting <img src="images/Arrow%20-%20Down%202.png" alt="Short"></p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="product-section-products">
-                <div class="products">
-                    <div class="product-card">
-                        <a href="product.html"><img src="images/product1.png" alt="Barberton Daisy"></a>
-
-                        <p>Barberton Daisy</p>
-                        <p class="price">$119.00</p>
-                    </div>
-                    <div class="product-card border_flowers">
-                        <img src="images/product-2.png" alt="Angel Wing Begonia">
-                        <p>Angel Wing Begonia</p>
-                        <p class="price">$169.00</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product3.png" alt="Barberton Daisy" id="Rectangle2">
-                        <p>African Violet</p>
-                        <p class="price">$199.00 <span>$229.00</span></p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product4.png" alt="Angel Wing Begonia">
-                        <p>Beach Spider Lily</p>
-                        <p class="price">$129.00</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product5.png" alt="Barberton Daisy">
-                        <p>Blushing Bromeliad</p>
-                        <p class="price">$139.00</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product6.png" alt="Angel Wing Begonia">
-                        <p>Aluminum Plant</p>
-                        <p class="price">$179.00</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product7.png" alt="Barberton Daisy">
-                        <p>Bird's Nest Fern</p>
-                        <p class="price">$99.00</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product8.png" alt="Angel Wing Begonia">
-                        <p>Broadleaf Lady Palm</p>
-                        <p class="price">$59.00</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="images/product9.png" alt="Barberton Daisy">
-                        <p>Chinese Evergreen</p>
-                        <p class="price">$39.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="product-section-pagination">
-                <div class="PageNumber">
-                    <a href="">1</a>
-                    <a href="">2</a>
-                    <a href="">3</a>
-                    <a href="">4</a>
-                    <a href=""><img src="images/Arrow%20-%20Right%202.png" alt="arrow"></a>
-                </div>
-            </div>
-        </div>
-
-
 
     </section>
-
     <section>
-        <div class="Flower_together">
-            <div class="Flowers_number1">
-                <img src="images/Folwers1.png" alt="Flowers">
-                <div class="text_flowers1">
-                    <h3>SUMMER CACTUS & SUCCULENTS</h3>
-                    <p>We are an online plant shop offering a wide range of cheap and trendy plants</p>
-                    <a href="">Find More <img src="images/Arrow%20-%20Right.png" alt="arrow"></a>
+
+        <div class="related-products">
+            <div class="text-green">
+                <h4>You may be interested in</h4>
+            </div>
+            <div class="products-row">
+                <div class="product-card swap">
+                    <img src="images/product4.png" alt="Angel Wing Begonia">
+                    <p>Beach Spider Lily</p>
+                    <p class="price">$129.00</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/product5.png" alt="Barberton Daisy">
+                    <p>Blushing Bromeliad</p>
+                    <p class="price">$139.00</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/product6.png" alt="Angel Wing Begonia">
+                    <p>Aluminum Plant</p>
+                    <p class="price">$179.00</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/product7.png" alt="Barberton Daisy">
+                    <p>Bird's Nest Fern</p>
+                    <p class="price">$99.00</p>
+                </div>
+                <div class="product-card">
+                    <img src="images/product9.png" alt="Barberton Daisy">
+                    <p>Chinese Evergreen</p>
+                    <p class="price">$39.00</p>
                 </div>
             </div>
-            <div class="Flowers_number2">
-                <img src="images/Flowers2.png" alt="Flowers2">
-                <div class="text_flowers2">
-                    <h3>SYLING TRENDS & MUCH MORE</h3>
-                    <p>We are an online plant shop offering a wide range of cheap and trendy plants</p>
-                    <a href="">Find More <img src="images/Arrow%20-%20Right.png" alt="arrow"></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="text_head">
-            <h1>Our Blogs Posts</h1>
-            <p>We are an online plant shop offering a wide range of cheap and trendy plants.</p>
-        </div>
-        <div class="Blogs_section">
-            <div class="More_info">
-                <img src="images/01.png" alt="png">
-                <p class="months">September 12 I Read in 6 minutes</p>
-                <h3 id="number1">Cactus & Succulent Care Tips</h3>
-                <p>Cacti are succulents are easy care plants for any home or patio.</p>
-                <a href="">Read More <img src="images/Arrow%20-%20Right-black.png" alt="arrow"></a>
-            </div>
-            <div class="More_info">
-                <img src="images/02.png" alt="02">
-                <p class="months">September 13 I Read in 2 minutes</p>
-                <h3 id="number2">Top 10 Succulents for Your Home</h3>
-                <p>Best in hanging baskets. Prefers medium to high light.</p>
-                <a href="">Read More <img src="images/Arrow%20-%20Right-black.png" alt="arrow"></a>
-            </div>
-            <div class="More_info">
-                <img src="images/03.png" alt="03">
-                <p class="months">September 15 I Read in 3 minutes</p>
-                <h3 id="number3">Cacti & Succulent Care Tips</h3>
-                <p>Cacti and succulents thrive in containers and because most are..</p>
-                <a href="" id="a_green">Read More <img src="images/Arrow%20-%20Right_green.png" alt="arrow"
-                                                       id="Arrow-green"></a>
-            </div>
-            <div class="More_info">
-                <img src="images/04.png" alt="04">
-                <p class="months">September 15 I Read in 2 minutes</p>
-                <h3 id="number4">Best Houseplants Room by Room</h3>
-                <p>The benefits of houseplants are endless. In addition to..</p>
-                <a href="">Read More <img src="images/Arrow%20-%20Right-black.png" alt="arrow"></a>
-            </div>
+            <div class="Group5"><img src="images/Group%2046.png" alt="group"></div>
         </div>
     </section>
 </main>
