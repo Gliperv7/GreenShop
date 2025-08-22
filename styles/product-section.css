@@ -27,7 +27,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+
 }
 
 body {
@@ -125,9 +125,6 @@ th:first-child {
     font-size: var(--container-font-size-bold);
 }
 
-/*.cart-totals div{*/
-/* padding: 10px 0;*/
-/*}*/
 [class^="coupon"] {
     padding: 10px 0;
 }
@@ -151,7 +148,7 @@ th:first-child {
 }
 
 .coupon-btn {
-    padding: 8px 15px;
+    padding: 15px 35px;
     background: var(--primary-color);
     color: white;
     border: none;
@@ -204,4 +201,32 @@ th:first-child {
 
 thead tr, thead th {
     border-bottom: 1px solid var(--primary-color);
+}
+.black{
+    color: var(--secondary-color);
+}
+.shipping-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shipping-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: var(--container-font-size);
+    padding: 10px 0;
+}
+.span-pudding{
+    padding:  10px 0;
+}
+
+
+.view-shipping {
+    font-size: calc(var(--container-font-size-small));
+    color: var(--primary-color);
+    cursor: pointer;
 }
