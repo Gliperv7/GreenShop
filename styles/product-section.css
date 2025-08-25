@@ -32,7 +32,6 @@
 
 body {
     background: #fff;
-    padding: 20px;
 }
 
 .cart-container {
@@ -58,9 +57,7 @@ table th {
 
 }
 
-th:first-child {
-    border-bottom: 1px solid var(--container-weight);
-}
+
 
 .product-info {
     display: flex;
@@ -100,10 +97,7 @@ th:first-child {
     font-size: 16px;
 }
 
-.trash {
-    cursor: pointer;
-    color: #666;
-}
+
 
 .total-price {
     color: #4caf50;
@@ -220,7 +214,10 @@ thead tr, thead th {
     font-size: var(--container-font-size);
     padding: 10px 0;
 }
-.span-pudding{
+.shipping-amount__padding-0{
+    padding: 0;
+}
+.span-bold{
     padding:  10px 0;
 }
 

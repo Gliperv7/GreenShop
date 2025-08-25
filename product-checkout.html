@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <title>product-cart</title>
+    <title>product-checkout</title>
 </head>
 <body>
 
@@ -80,158 +80,101 @@
                     </li>
                     <li class="header-nav-list-item">
                         <a href="/product.html" class="header-nav-list-item-link">
-                            Shopping Cart
+                            Checkout
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="cart-container">
+            <h2>Billing Address</h2>
+            <form class="form-order" action="/index.html" method="GET">
 
-                <table>
-                    <thead>
-                    <tr>
-                        <th class="border-bottom">Products</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="images/small_images24.png" alt="daisy">
-                                <div>
-                                    <div class="product-name">Barberton Daisy</div>
-                                    <div class="sku">SKU: 1995751877966</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="price-one">$119.00</td>
-                        <td>
-                            <div class="quantity-control">
-                                <button>-</button>
-                                <span>2</span>
-                                <button>+</button>
-                            </div>
-                        </td>
-                        <td class="total-price">$238.00</td>
-                        <td class="trash"><img src="svg/Delete.svg" alt="delete"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="images/product5.png" alt="blushing">
-                                <div>
-                                    <div class="product-name">Blushing Bromeliad</div>
-                                    <div class="sku">SKU: 19957518757065</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="price-one">$139.00</td>
-                        <td>
-                            <div class="quantity-control">
-                                <button>-</button>
-                                <span>6</span>
-                                <button>+</button>
-                            </div>
-                        </td>
-                        <td class="total-price">$834.00</td>
-                        <td class="trash"><img src="svg/Delete.svg" alt="delete"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="images/product6.png" alt="plant">
-                                <div>
-                                    <div class="product-name">Aluminum Plant</div>
-                                    <div class="sku">SKU: 1995751877786</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="price-one">$179.00</td>
-                        <td>
-                            <div class="quantity-control">
-                                <button>-</button>
-                                <span>9</span>
-                                <button>+</button>
-                            </div>
-                        </td>
-                        <td class="total-price">$1,611.00</td>
-                        <td class="trash"><img src="svg/Delete.svg" alt="delete"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-
-                <div class="cart-totals">
-                    <h3>Cart Totals</h3>
-                    <div class="coupon">
-                        <label for="coupon-code" class="coupon-label">Coupon Apply</label>
-                        <div class="coupon-field">
-                            <input id="coupon-code" type="text" placeholder="Enter coupon code here..."
-                                   class="coupon-input">
-                            <button type="button" class="coupon-btn">Apply</button>
-                        </div>
+                    <div>
+                        <label for="firstName">First Name <span class="warning">*</span></label>
+                        <input type="text" id="firstName" required>
                     </div>
 
-                    <p><span>Subtotal</span><span class="shipping-amount shipping-amount__padding-0">$2,683.00</span></p>
-                    <p><span>Coupon Discount</span><span>(-) 00.00</span></p>
-                    <p class="shipping-row">
-                        <span >Shipping</span>
-                        <span class="shipping-amount">
-                            <span class="span-bold">
-                         $16.00
-                                </span>
-                        <span class="view-shipping">View shipping charge</span>
-                            </span>
-                    </p>
-                    <p class="grand-total"><span class="black">Total</span><span>$2,699.00</span></p>
-                    <a href="product-checkout.html"><button class="checkout">Proceed To Checkout</button></a>
-                    <a href="#" class="continue">Continue Shopping</a>
-                </div>
+                    <div>
+                        <label for="lastName">Last Name <span class="warning">*</span></label>
+                        <input type="text" id="lastName" required>
+                    </div>
+
+                    <div>
+                        <label for="country">Country / Region <span class="warning">*</span></label>
+                        <select id="country" required>
+                            <option value="">Select a country / region</option>
+                            <option value="ua">Ukraine</option>
+                            <option value="us">USA</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="city">Town / City <span class="warning">*</span></label>
+                        <input type="text" id="city" required>
+                    </div>
+
+                    <div>
+                        <label for="address">Street Address <span class="warning">*</span></label>
+                        <input type="text" id="address" placeholder="House number and street name" required>
+                    </div>
+
+                    <div>
+                        <label for="apt"> ㅤ</label>
+                        <input type="text" id="apt" placeholder="Apartment, suite, unit, etc.(optional)">
+                    </div>
+
+                    <div>
+                        <label for="state">State <span class="warning">*</span></label>
+                        <select id="state" required>
+                            <option value="">Select a state</option>
+                            <option value="ky">Kyiv</option>
+                            <option value="lv">Lviv</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="zip">Zip <span class="warning">*</span></label>
+                        <input type="text" id="zip" required>
+                    </div>
+
+                    <div>
+                        <label for="email">Email address <span class="warning">*</span></label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div>
+                        <label for="phone">Phone Number <span class="warning">*</span></label>
+                        <select id="phone" required>
+                            <option value="">+996</option>
+                            <option value="+996">+996</option>
+                            <option value="+380">+380</option>
+                            </select>
+
+                    </div>
+
+                    <div class="full-width">
+                        <label class="circle-checkbox">
+                            <input type="checkbox" />
+                            Ship to a different address?
+                        </label>
+                    </div>
+
+                    <div class="full-width">
+                        <label for="notes">Order notes (optional)</label>
+                        <textarea class="order-notes" id="notes" ></textarea>
+                    </div>
+
+
+
+
+
+
+            </form>
+
+
+
+
+
             </div>
-
-
-        </div>
-
-    </section>
-    <section>
-
-        <div class="related-products">
-            <div class="text-green">
-                <h4>You may be interested in</h4>
-            </div>
-            <div class="products-row">
-                <div class="product-card swap">
-                    <img src="images/product4.png" alt="Angel Wing Begonia">
-                    <p>Beach Spider Lily</p>
-                    <p class="price">$129.00</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/product5.png" alt="Barberton Daisy">
-                    <p>Blushing Bromeliad</p>
-                    <p class="price">$139.00</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/product6.png" alt="Angel Wing Begonia">
-                    <p>Aluminum Plant</p>
-                    <p class="price">$179.00</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/product7.png" alt="Barberton Daisy">
-                    <p>Bird's Nest Fern</p>
-                    <p class="price">$99.00</p>
-                </div>
-                <div class="product-card">
-                    <img src="images/product9.png" alt="Barberton Daisy">
-                    <p>Chinese Evergreen</p>
-                    <p class="price">$39.00</p>
-                </div>
-            </div>
-            <div class="Group5"><img src="images/Group%2046.png" alt="group"></div>
-        </div>
     </section>
 </main>
 
