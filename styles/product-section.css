@@ -41,8 +41,27 @@ body {
 
 
 table {
-    width: 70%;
+    width: 30%;
     border-collapse: collapse;
+
+}
+.table__modificator{
+    width: 30%;
+    border-collapse: collapse;
+}
+
+.left-right{
+    display: flex;
+    justify-content: space-between;
+}
+.left {
+    width: 60%;
+
+}
+.right{
+    width: 40%;
+white-space: nowrap;
+
 }
 
 table th, table td {
@@ -212,11 +231,13 @@ thead tr, thead th {
     color: var(--secondary-color);
     font-weight: bold;
     font-size: var(--container-font-size);
-    padding: 10px 0;
+
 }
+
 .shipping-amount__padding-0{
     padding: 0;
 }
+
 .span-bold{
     padding:  10px 0;
 }

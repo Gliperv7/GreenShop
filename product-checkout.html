@@ -85,96 +85,194 @@
                     </li>
                 </ul>
             </div>
-            <h2>Billing Address</h2>
-            <form class="form-order" action="/index.html" method="GET">
+            <div class="left-right">
+                <div class="left">
+                    <h2>Billing Address</h2>
+                    <form class="form-order" action="/index.html" method="GET">
 
-                    <div>
-                        <label for="firstName">First Name <span class="warning">*</span></label>
-                        <input type="text" id="firstName" required>
-                    </div>
+                        <div>
+                            <label for="firstName">First Name <span class="warning">*</span></label>
+                            <input type="text" id="firstName" required>
+                        </div>
 
-                    <div>
-                        <label for="lastName">Last Name <span class="warning">*</span></label>
-                        <input type="text" id="lastName" required>
-                    </div>
+                        <div>
+                            <label for="lastName">Last Name <span class="warning">*</span></label>
+                            <input type="text" id="lastName" required>
+                        </div>
 
-                    <div>
-                        <label for="country">Country / Region <span class="warning">*</span></label>
-                        <select id="country" required>
-                            <option value="">Select a country / region</option>
-                            <option value="ua">Ukraine</option>
-                            <option value="us">USA</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="city">Town / City <span class="warning">*</span></label>
-                        <input type="text" id="city" required>
-                    </div>
-
-                    <div>
-                        <label for="address">Street Address <span class="warning">*</span></label>
-                        <input type="text" id="address" placeholder="House number and street name" required>
-                    </div>
-
-                    <div>
-                        <label for="apt"> ㅤ</label>
-                        <input type="text" id="apt" placeholder="Apartment, suite, unit, etc.(optional)">
-                    </div>
-
-                    <div>
-                        <label for="state">State <span class="warning">*</span></label>
-                        <select id="state" required>
-                            <option value="">Select a state</option>
-                            <option value="ky">Kyiv</option>
-                            <option value="lv">Lviv</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="zip">Zip <span class="warning">*</span></label>
-                        <input type="text" id="zip" required>
-                    </div>
-
-                    <div>
-                        <label for="email">Email address <span class="warning">*</span></label>
-                        <input type="email" id="email" required>
-                    </div>
-
-                    <div>
-                        <label for="phone">Phone Number <span class="warning">*</span></label>
-                        <select id="phone" required>
-                            <option value="">+996</option>
-                            <option value="+996">+996</option>
-                            <option value="+380">+380</option>
+                        <div>
+                            <label for="country">Country / Region <span class="warning">*</span></label>
+                            <select id="country" required>
+                                <option value="" class="options-firs">Select a country / region</option>
+                                <option value="ua">Ukraine</option>
+                                <option value="us">USA</option>
                             </select>
+                        </div>
 
+                        <div>
+                            <label for="city">Town / City <span class="warning">*</span></label>
+                            <input type="text" id="city" required>
+                        </div>
+
+                        <div>
+                            <label for="address">Street Address <span class="warning">*</span></label>
+                            <input type="text" id="address" placeholder="House number and street name" required>
+                        </div>
+
+                        <div>
+                            <label for="apt"> ㅤ</label>
+                            <input type="text" id="apt" placeholder="Apartment, suite, unit, etc.(optional)">
+                        </div>
+
+                        <div>
+                            <label for="state">State <span class="warning">*</span></label>
+                            <select id="state" required>
+                                <option value="" class="options-firs">Select a state</option>
+                                <option value="ky">Kyiv</option>
+                                <option value="lv">Lviv</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="zip">Zip <span class="warning">*</span></label>
+                            <input type="text" id="zip" required>
+                        </div>
+
+                        <div>
+                            <label for="email">Email address <span class="warning">*</span></label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div>
+                            <label for="phone">Phone Number <span class="warning">*</span></label>
+                            <select id="phone" required>
+                                <option value="" class="options-firs">+996</option>
+                                <option value="+996">+996</option>
+                                <option value="+380">+380</option>
+                            </select>
+                        </div>
+
+                        <div class="full-width">
+                            <label class="circle-checkbox">
+                                <input type="checkbox"/>
+                                Ship to a different address?
+                            </label>
+                        </div>
+
+                        <div class="full-width">
+                            <label for="notes">Order notes (optional)</label>
+                            <textarea class="order-notes" id="notes"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="right">
+                    <div class="order">
+                        <h2 class="order__title">Your Order</h2>
+
+                        <div class="order__header">
+                            <span class="order__products">Products</span>
+                            <span class="order__subtotal">Subtotal</span>
+                        </div>
+
+                        <hr class="order__line">
                     </div>
+                    <table class="table__modificator">
+                        <tr>
+                        <td>
+                            <div class="product-info">
+                                <img src="images/small_images24.png" alt="daisy">
+                                <div>
+                                    <div class="product-name">Barberton Daisy</div>
+                                    <div class="sku">SKU: 1995751877966</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price-one">(x2)</td>
+                        <td class="total-price">$238.00</td>
 
-                    <div class="full-width">
-                        <label class="circle-checkbox">
-                            <input type="checkbox" />
-                            Ship to a different address?
-                        </label>
-                    </div>
+                    </tr>
+                        <tr>
+                            <td>
+                                <div class="product-info">
+                                    <img src="images/product5.png" alt="blushing">
+                                    <div>
+                                        <div class="product-name">Blushing Bromeliad</div>
+                                        <div class="sku">SKU: 19957518757065</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-one">(x6)</td>
+                            <td class="total-price">$834.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-info">
+                                    <img src="images/product6.png" alt="plant">
+                                    <div>
+                                        <div class="product-name">Aluminum Plant</div>
+                                        <div class="sku">SKU: 1995751877786</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="price-one">(x9)</td>
+                            <td class="total-price">$1,611.00</td>
+                        </tr>
+                    </table>
+<!--                    <div class="checkout">-->
+<!--                        <p class="checkout__coupon">-->
+<!--                            Have a coupon code? <a href="#" class="checkout__coupon-link">Click here</a>-->
+<!--                        </p>-->
 
-                    <div class="full-width">
-                        <label for="notes">Order notes (optional)</label>
-                        <textarea class="order-notes" id="notes" ></textarea>
-                    </div>
+<!--                        <div class="checkout__summary">-->
+<!--                            <div class="checkout__row">-->
+<!--                                <span class="checkout__label">Subtotal</span>-->
+<!--                                <span class="checkout__value">$2,683.00</span>-->
+<!--                            </div>-->
+<!--                            <div class="checkout__row">-->
+<!--                                <span class="checkout__label">Coupon Discount</span>-->
+<!--                                <span class="checkout__value">(-) 00.00</span>-->
+<!--                            </div>-->
+<!--                            <div class="checkout__row">-->
+<!--                                <span class="checkout__label">Shipping</span>-->
+<!--                                <span class="checkout__value">$16.00-->
+<!--                                    <a href="#" class="checkout__shipping-link">-->
+<!--                                    View shipping charge</a>-->
+<!--                                </span>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
+<!--                        <div class="checkout__total">-->
+<!--                            <span class="checkout__total-label">Total</span>-->
+<!--                            <span class="checkout__total-value">$2,699.00</span>-->
+<!--                        </div>-->
 
+<!--                        <div class="checkout__payment">-->
+<!--                            <h3 class="checkout__payment-title">Payment Method</h3>-->
 
+<!--                            <label class="checkout__option">-->
+<!--                                <input type="radio" name="payment" class="checkout__radio">-->
+<!--                                <span class="checkout__icons">[PAYMENT ICONS]</span>-->
+<!--                            </label>-->
 
+<!--                            <label class="checkout__option">-->
+<!--                                <input type="radio" name="payment" class="checkout__radio">-->
+<!--                                <span class="checkout__text">Direct bank transfer</span>-->
+<!--                            </label>-->
 
+<!--                            <label class="checkout__option checkout__option&#45;&#45;active">-->
+<!--                                <input type="radio" name="payment" class="checkout__radio" checked>-->
+<!--                                <span class="checkout__text">Cash on delivery</span>-->
+<!--                            </label>-->
+<!--                        </div>-->
 
-            </form>
+<!--                        <button class="checkout__btn">Place Order</button>-->
+<!--                    </div>-->
 
-
-
-
-
+                </div>
             </div>
+
+
+        </div>
     </section>
 </main>
 
