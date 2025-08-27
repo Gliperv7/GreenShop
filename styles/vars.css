@@ -1,5 +1,6 @@
 :root {
-    --primary-color: rgb(70, 163, 88);
+    --primary-color: #46A358;
+    --primary-color-50-procent: rgba(70, 163, 88, 0.5);
     --secondary-color: #3D3D3D;
     --text-color-black: black;
     --text-color-white: white;

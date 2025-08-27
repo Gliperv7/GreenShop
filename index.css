@@ -575,98 +575,161 @@ input, select, textarea {
     border-top: 1px solid var(--primary-color);
 }
 
-/*body {*/
+body {
 
 
-/*    margin: 0;*/
-/*    padding: 20px;*/
+    margin: 0;
+    padding: 20px;
 
-/*}*/
-
-/*.checkout {*/
-/*    max-width: 400px;*/
-/*    margin: auto;*/
-
-/*    padding: 20px;*/
-/*    border-radius: 6px;*/
-
-/*}*/
-
-/*.checkout__coupon {*/
-/*    font-size: 14px;*/
-/*    margin-bottom: 15px;*/
-/*}*/
-
-/*.checkout__coupon-link {*/
-
-/*    text-decoration: none;*/
-/*}*/
-
-/*.checkout__summary {*/
-
-/*    margin-bottom: 15px;*/
-/*}*/
-
-/*.checkout__row {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    padding: 5px 0;*/
-/*    font-size: 15px;*/
-/*}*/
-
-/*.checkout__shipping-link {*/
-/*    font-size: 12px;*/
-
-/*    margin-left: 5px;*/
-/*}*/
-
-/*.checkout__total {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    font-weight: bold;*/
-/*    font-size: 18px;*/
-/*    margin: 15px 0;*/
-
-/*}*/
-
-/*.checkout__payment-title {*/
-/*    margin-bottom: 10px;*/
-/*    font-size: 16px;*/
-/*}*/
-
-/*.checkout__option {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: space-between;*/
-/*    padding: 12px;*/
-
-/*    border-radius: 6px;*/
-/*    margin-bottom: 10px;*/
-
-/*    cursor: pointer;*/
-/*}*/
-
-/*.checkout__option--active {*/
-
-/*}*/
-
-/*.checkout__radio {*/
-
-/*}*/
-
-/*.checkout__btn {*/
-/*    display: block;*/
-/*    width: 100%;*/
-/*    padding: 15px;*/
-/*    border: none;*/
-
-/*    font-size: 16px;*/
-/*    border-radius: 6px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.checkout__btn:hover {*/
-
-/*}*/
+}
 
 
+
+.checkout__coupon {
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: right;
+}
+.checkout__modification{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    font-size: var(--container-font-size-bold);
+    font-weight: bold;
+}
+.checkout__total-value{
+    color: var(--primary-color);
+}
+.checkout__total{
+    border-top:1px solid var(--primary-color-50-procent);
+    padding: 10px 0;
+}
+
+.checkout__coupon-link {
+color: var(--primary-color);
+    text-decoration: none;
+}
+
+.checkout__summary {
+
+    margin-bottom: 15px;
+}
+
+.checkout__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 15px;
+}
+
+.checkout__shipping-link {
+    font-size: 12px;
+    color: var(--primary-color);
+    margin-left: 5px;
+}
+
+.checkout__total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 15px 0;
+
+}
+
+.checkout__payment-title {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+
+
+.checkout {
+
+    background-color: var(--primary-background, #fff);
+    padding: 20px;
+    border-radius: 6px;
+    color: var(--secondary-color, #333);
+    width: 421px;
+}
+
+.checkout__payment-title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.checkout__option {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    border: 1px solid var(--primary-color, #28a745);
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.checkout__radio {
+    margin-right: 10px;
+color: var(--primary-color);
+    margin-top: 2px;
+}
+
+.checkout__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.checkout__icon {
+    height: 22px;
+}
+
+.checkout__btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: var(--primary-color, #28a745);
+    color: var(--text-color-white, #fff);
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.checkout__label{
+    color: var(--secondary-color);
+    font-size: calc(var(--container-gap));
+    font-weight: 400;
+}
+.checkout__shipping-link{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.checkout__radio {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 13px;
+    height: 13px;
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+.checkout__radio:checked {
+    background-color: var(--primary-background);
+    border-color: #28a745;
+}
+.checkout__radio:checked::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
