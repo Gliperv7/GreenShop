@@ -13,7 +13,8 @@
     --primary-background: #FBFBFB;
     --secondary-background: #CBCBCB;
 
-    --container-size: 1500px;
+    --container-size: 1400px;
+    --container-size-modification:1800px;
     --container-pading: 10px;
     --container-gap: 15px;
     --container-font-size: 16px;

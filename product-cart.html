@@ -66,6 +66,7 @@
 <main>
     <section>
         <div class="wrapper-product">
+
             <div class="header-nav header-nav--breadcrumbs">
                 <ul class="product-list">
                     <li class="header-nav-list-item">
@@ -79,7 +80,7 @@
                         </a>
                     </li>
                     <li class="header-nav-list-item">
-                        <a href="/product.html" class="header-nav-list-item-link">
+                        <a href="/product.html" class="header-nav-list-item-link active-breadcrumb">
                             Shopping Cart
                         </a>
                     </li>
@@ -87,7 +88,7 @@
             </div>
             <div class="cart-container">
 
-                <table>
+                <table class="table-cart">
                     <thead>
                     <tr>
                         <th class="border-bottom">Products</th>
@@ -168,12 +169,13 @@
                 <div class="cart-totals">
                     <h3>Cart Totals</h3>
                     <div class="coupon">
-                        <label for="coupon-code" class="coupon-label">Coupon Apply</label>
-                        <div class="coupon-field">
-                            <input id="coupon-code" type="text" placeholder="Enter coupon code here..."
-                                   class="coupon-input">
-                            <button type="button" class="coupon-btn">Apply</button>
-                        </div>
+                        <form class="form-all" action="product-cart.html" method="GET">
+                            <label for="coupon-code" class="coupon-label">Coupon Apply</label>
+                            <div class="coupon-field">
+                                <input id="coupon-code" type="text" placeholder="Enter coupon code here..." class="coupon-input" name="coupon">
+                                <button type="submit" class="coupon-btn">Apply</button>
+                            </div>
+                        </form>
                     </div>
 
                     <p><span>Subtotal</span><span class="shipping-amount shipping-amount__padding-0">$2,683.00</span></p>
@@ -188,7 +190,7 @@
                             </span>
                     </p>
                     <p class="grand-total"><span class="black">Total</span><span>$2,699.00</span></p>
-                    <a href="product-checkout.html"><button class="checkout">Proceed To Checkout</button></a>
+                    <a href="product-checkout.html"><button class="checkout-button" >Proceed To Checkout</button></a>
                     <a href="#" class="continue">Continue Shopping</a>
                 </div>
             </div>

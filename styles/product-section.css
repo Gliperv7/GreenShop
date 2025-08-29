@@ -1,8 +1,6 @@
 .product-section {
     width: var(--container-size);
     margin: 0 auto;
-
-    min-height: 100vh;
     display: flex;
 
 }
@@ -40,8 +38,8 @@ body {
 }
 
 
-table {
-    width: 30%;
+.table-cart {
+    width: 60%;
     border-collapse: collapse;
 
 }
@@ -50,15 +48,15 @@ table {
     border-collapse: collapse;
 }
 
-.left-right{
+.left-right-order{
     display: flex;
     justify-content: space-between;
 }
-.left {
+.left-form {
     width: 60%;
 
 }
-.right{
+.right-order{
     width: 40%;
 white-space: nowrap;
 
@@ -187,7 +185,7 @@ table th {
     margin-top: 10px;
 }
 
-.checkout {
+.checkout-button {
     width: 100%;
     margin-top: 15px;
     padding: 12px;

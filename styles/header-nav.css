@@ -21,6 +21,7 @@
 
 .container {
     max-width: 1400px;
+
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -67,25 +68,3 @@ nav a.active {
     background-color: rgba(70, 163, 88, 1);
 }
 
-.header-nav--breadcrumbs{
-    display: flex;
-    gap: 5px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.header-nav--breadcrumbs li {
-    display: inline-block;
-    color: var(--secondary-color);
-
-}
-.header-nav--breadcrumbs a{
-    color: var(--secondary-color);
-
-}
-.header-nav--breadcrumbs li:first-child{
-    font-weight: bold;
-}
-.header-nav--breadcrumbs ul{
-    padding: 0 0 50px 0;
-}

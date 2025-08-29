@@ -1,14 +1,19 @@
+.footer {
+    width: var(--container-size);
+    margin: 0 auto;
+}
+
+
 .footer-top{
   display: flex;
   justify-content: center;
   align-items: center;
   width: 1400px;
   margin-top: 100px;
-  margin-left: 200px;
+  /*margin-left: 200px;*/
   gap: 100px;
 }
 .footer-subscribe {
-  max-width: 400px;
   font-size: 13px;
 }
 .footer-subscribe h4{
@@ -50,7 +55,7 @@
 .footer-midle{
   display: flex;
   align-items: center;
-  margin: 50px 190px;
+  margin:50px 0 ;
   width: 1400px;
   height: 88px;
   border-top: 1px solid rgb(149, 189, 157);
@@ -79,10 +84,10 @@
 .footer_links_ct {
   display: flex;
   gap:250px ;
-  margin-left: 200px;
+
   border-bottom: 1px solid #46a35979  ;
 padding-bottom: 30px;
- width: 1300px;
+ width: 1400px;
 }
 .footer_links_ct a{
   text-decoration: none;

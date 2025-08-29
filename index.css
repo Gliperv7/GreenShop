@@ -1,5 +1,4 @@
 @import url("styles/vars.css");
-
 @import url("styles/reset.css");
 @import url("styles/footer.css");
 @import url("styles/product.css");
@@ -7,15 +6,16 @@
 @import url("styles/header-nav.css");
 @import url("styles/product-section.css");
 @import url("styles/aside.css");
+@import url("styles/breadcrumbs.css");
 
 body{
     font-family: "CeraPro", sans-serif ;
     background-color: var(--primary-background);
 }
 .container1 {
-  max-width: var(--container-size);
+  max-width: var(--container-size-modification);
   height: 450px;
-  margin: 100px auto 200px 0;
+  margin: 0 auto ;
   display: block;
   padding-top: 20px;
 }
@@ -121,10 +121,9 @@ height: 250px;
 }
 .Flower_together{
   display: flex;
-  margin-left: 250px;
+    justify-content: center;
   gap: 100px;
-  margin-top: 100px;
-  margin-bottom: 200px;
+    margin: 100px 0 200px 0;
 }
 .Flowers_number1 img ,.Flowers_number2 img{
   height: 300px;
@@ -162,8 +161,9 @@ color: var(--text-color-white);
 }
 .Blogs_section{
   display: flex;
+    justify-content: center;
   gap: 50px;
-  margin:  auto 350px;
+  margin:  0 auto;
 }
 .text_head{
 
@@ -390,10 +390,11 @@ margin-bottom: -3px;
 }
 .text-product-comment{
     display: flex;
+
     flex-direction: column;
     position: relative;
-    left: 230px;
-    margin: 20px 0;
+
+    margin: 0 auto;
     gap: 20px;
     height: 600px;
     width: 1400px;
@@ -416,25 +417,21 @@ margin-bottom: -3px;
     display: flex;
     flex-direction: column;
     position: relative;
-    left: 230px;
-    margin: 20px 0;
+    margin: 0 auto;
     gap: 20px;
     height: 400px;
-    width: 1200px;
+    width: var(--container-size);
 }
 .text-green , .product-comment-title{
     display: flex;
+    margin: 0 auto;
     align-items: center;
     gap: 30px;
     height: 50px;
     width: 1400px;
     border-bottom: 1px solid var(--moz-border-bottom-colors);
-
 }
-.product-comment-title{
-    margin: 0 0 0 230px;
 
-}
 .text-green{
     color:var(--primary-color);
     padding: 10px 0;
@@ -460,12 +457,12 @@ margin-bottom: -3px;
     width: 1200px;
     height: 449px;
     }
-form {
+.form-order {
     max-width: 700px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: calc(var(--container-pading) * 2);
 }
 
 label {
@@ -525,17 +522,20 @@ input, select, textarea {
     height: 120px;
     resize: none;
 }
-.left h2 {
+
+
+
+.left-form h2 {
     font-size: calc(var(--container-font-size--medium));
     padding: 0 0 var(--container-pading) 0;
     color: var(--secondary-color);
 }
-.left label{
+.left-form label{
     font-size: calc(var(--container-pading) * 1,5);
     font-weight:400;
     color: var(--secondary-color);
 }
-.left option:first-child{
+.left-form option:first-child{
     color: var(--place-holder-color);
 }
 .options-firs{
@@ -575,13 +575,7 @@ input, select, textarea {
     border-top: 1px solid var(--primary-color);
 }
 
-body {
 
-
-    margin: 0;
-    padding: 20px;
-
-}
 
 
 

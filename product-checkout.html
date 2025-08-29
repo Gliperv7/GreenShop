@@ -19,12 +19,12 @@
         </ul>
         <ul class="header-nav-list header-nav-list-border">
             <li class="header-nav-list-item">
-                <a href="/index.html" class="header-nav-list-item-link actives">
+                <a href="/index.html" class="header-nav-list-item-link">
                     Home
                 </a>
             </li>
             <li class="header-nav-list-item">
-                <a href="/index.html" class="header-nav-list-item-link">
+                <a href="/index.html" class="header-nav-list-item-link active">
                     Shop
                 </a>
             </li>
@@ -79,30 +79,29 @@
                         </a>
                     </li>
                     <li class="header-nav-list-item">
-                        <a href="/product.html" class="header-nav-list-item-link">
+                        <a href="/product.html" class="header-nav-list-item-link active-breadcrumb">
                             Checkout
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="left-right">
-                <div class="left">
-                    <h2>Billing Address</h2>
-                    <form class="form-order" action="/index.html" method="GET">
-
+            <form class="form-all" action="/index.html" method="GET">
+            <div class="left-right-order">
+                <div class="left-form"><h2>Billing Address</h2>
+                    <div class="form-order">
                         <div>
                             <label for="firstName">First Name <span class="warning">*</span></label>
-                            <input type="text" id="firstName" required>
+                            <input type="text" id="firstName" name="firstName" required>
                         </div>
 
                         <div>
                             <label for="lastName">Last Name <span class="warning">*</span></label>
-                            <input type="text" id="lastName" required>
+                            <input type="text" id="lastName" name="lastName" required>
                         </div>
 
                         <div>
                             <label for="country">Country / Region <span class="warning">*</span></label>
-                            <select id="country" required>
+                            <select id="country" name="country" required>
                                 <option value="" class="options-firs">Select a country / region</option>
                                 <option value="ua">Ukraine</option>
                                 <option value="us">USA</option>
@@ -111,22 +110,22 @@
 
                         <div>
                             <label for="city">Town / City <span class="warning">*</span></label>
-                            <input type="text" id="city" required>
+                            <input type="text" id="city" name="city" required>
                         </div>
 
                         <div>
                             <label for="address">Street Address <span class="warning">*</span></label>
-                            <input type="text" id="address" placeholder="House number and street name" required>
+                            <input type="text" id="address" name="address" placeholder="House number and street name" required>
                         </div>
 
                         <div>
                             <label for="apt"> ㅤ</label>
-                            <input type="text" id="apt" placeholder="Apartment, suite, unit, etc.(optional)">
+                            <input type="text" id="apt" name="apt" placeholder="Apartment, suite, unit, etc.(optional)">
                         </div>
 
                         <div>
                             <label for="state">State <span class="warning">*</span></label>
-                            <select id="state" required>
+                            <select id="state" name="state" required>
                                 <option value="" class="options-firs">Select a state</option>
                                 <option value="ky">Kyiv</option>
                                 <option value="lv">Lviv</option>
@@ -135,17 +134,17 @@
 
                         <div>
                             <label for="zip">Zip <span class="warning">*</span></label>
-                            <input type="text" id="zip" required>
+                            <input type="text"  id="zip" name="zip" required>
                         </div>
 
                         <div>
                             <label for="email">Email address <span class="warning">*</span></label>
-                            <input type="email" id="email" required>
+                            <input type="email" id="email" name="email" required>
                         </div>
 
                         <div>
                             <label for="phone">Phone Number <span class="warning">*</span></label>
-                            <select id="phone" required>
+                            <select id="phone" name="phone" required>
                                 <option value="" class="options-firs">+996</option>
                                 <option value="+996">+996</option>
                                 <option value="+380">+380</option>
@@ -154,18 +153,22 @@
 
                         <div class="full-width">
                             <label class="circle-checkbox">
-                                <input type="checkbox"/>
+                                <input type="checkbox" name="isAddress"/>
                                 Ship to a different address?
                             </label>
                         </div>
 
                         <div class="full-width">
                             <label for="notes">Order notes (optional)</label>
-                            <textarea class="order-notes" id="notes"></textarea>
+                            <textarea class="order-notes" id="notes" name="notes"></textarea>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="right">
+
+
+
+
+                <div class="right-order">
                     <div class="order">
                         <h2 class="order__title">Your Order</h2>
 
@@ -270,14 +273,15 @@
                             ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ ㅤ
                         </label>
 
-                        <button class="checkout__btn">Place Order</button>
+                        <button class="checkout__btn" type="submit">Place Order</button>
 
 
                     </div>
 
                 </div>
-            </div>
 
+            </div>
+            </form>
 
         </div>
     </section>
