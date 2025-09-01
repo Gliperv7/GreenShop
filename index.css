@@ -7,6 +7,7 @@
 @import url("styles/product-section.css");
 @import url("styles/aside.css");
 @import url("styles/breadcrumbs.css");
+@import url("styles/modal.css");
 
 body{
     font-family: "CeraPro", sans-serif ;

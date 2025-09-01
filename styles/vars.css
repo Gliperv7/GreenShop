@@ -10,6 +10,7 @@
     --warning-color: #F03800;
     --moz-border-bottom-colors: #cce5cc;
 
+    --modal-background-color: rgba(34, 60, 80, 0.2);
     --primary-background: #FBFBFB;
     --secondary-background: #CBCBCB;
 
@@ -23,5 +24,7 @@
     --container-font-size-small: 12px;
     --container-weight:650px;
     --container-weight-medium:950px ;
+    --modal-weidght:578px;
+    --modal-height:850px;
 }
 
