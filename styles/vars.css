@@ -1,6 +1,7 @@
 :root {
     --primary-color: #46A358;
     --primary-color-50-procent: rgba(70, 163, 88, 0.5);
+    --primary-color-30-procent: rgba(70, 163, 88, 0.3);
     --secondary-color: #3D3D3D;
     --text-color-black: black;
     --text-color-white: white;
@@ -22,6 +23,7 @@
     --container-font-size--medium: 17px;
     --container-font-size-bold: 18px;
     --container-font-size-small: 12px;
+    --container-font-size-medium-extra: 14px;
     --container-weight:650px;
     --container-weight-medium:950px ;
     --modal-weidght:578px;
