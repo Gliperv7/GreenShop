@@ -18,6 +18,7 @@
     --container-size: 1400px;
     --container-size-modification:1800px;
     --container-pading: 10px;
+    --container-padded-size: 100px;
     --container-gap: 15px;
     --container-font-size: 16px;
     --container-font-size--medium: 17px;
@@ -28,5 +29,9 @@
     --container-weight-medium:950px ;
     --modal-weidght:578px;
     --modal-height:850px;
+    --order-text-weight:483px;
+    --order-text-height:46px;
+    --order-checkout-link-weight:162px;
+    --order-checkout-link-height:45px;
 }
 
