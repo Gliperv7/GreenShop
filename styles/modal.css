@@ -181,7 +181,7 @@ padding: 0 10px;
     color: var(--description-color);
     padding: var(--container-pading) 0;
 }
-.order-checkout-link{
+.track-btn{
     display: flex;
    margin: calc(var(--container-pading)*3) auto calc(var(--container-pading)*2) auto;
     text-decoration: none;
@@ -189,7 +189,7 @@ padding: 0 10px;
     height: var(--order-checkout-link-height);
     border: 1px solid var(--primary-color);
     background-color: var(--primary-color);
-    padding: 10px 20px ;
+    padding: var(--container-font-size-small) calc(var(--container-pading)* 2) 0 calc(var(--container-pading)* 2);
     border-radius: calc(var(--container-pading) / 1.5);
     white-space: nowrap;
     color: var(--text-color-white);

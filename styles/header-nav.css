@@ -68,3 +68,25 @@ nav a.active {
     background-color: rgba(70, 163, 88, 1);
 }
 
+.header-nav-list-item-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--container-pading)*0.3);;
+    line-height: normal;
+
+    text-decoration: none;
+    font-size: var(--container-font-size);
+    font-weight: 500;
+    width: var(--container-padded-size);
+    height: calc(var(--container-pading) * 3.5);
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    border-radius: calc(var(--container-pading) / 1.5);
+    white-space: nowrap;
+    color: var(--text-color-white);
+}
+.header-nav-list-item-action-btn-span{
+    width: calc(var(--container-pading) * 2.3);
+    height: calc(var(--container-pading) * 2.3);
+}
