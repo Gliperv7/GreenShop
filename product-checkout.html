@@ -54,14 +54,58 @@
                 </a>
             </li>
             <li class="header-nav-list-item">
-                <button class="header-nav-list-item-action header-nav-list-item-action-btn">
+                <button class="header-nav-list-item-action header-nav-list-item-action-btn" id="modal-login--open" >
                     <span class="header-nav-list-item-action-btn-span"><img src="images/Logout.png" alt="login" class="header-nav-list-item-img"></span>
                     Login
                 </button>
+
+                <div class="modal" id="modal-login">
+                    <div class="modal__box-login">
+                        <form action="/service-order" method="POST">
+                            <button type="button" class="modal__close-btn" id="close--modal-btn-login">
+                                <svg width="12" height="12" viewBox="0 0 23 25" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
+                                          fill="#333333"/>
+                                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333"/>
+                                </svg>
+                            </button>
+                            <div class="modal__box-login-form">
+                                <span class="modal__box-login-form__text">Login</span>
+                                <span class="modal__box-login-form__text modal__box-login-form__center">I</span>
+                                <span class="modal__box-login-form__text">Register</span>
+                            </div>
+                            <div class="modal__box-login-form modal__box-login-form__modification">
+                              <span class="modal__box-login-form__text modal__box-login-form-text__modification">Enter your username and password to login.</span>
+                            </div>
+
+                                <div class="form__group">
+                                    <label class="form__label">
+                                        <input type="email" class="form__input" placeholder="Email" required>
+                                    </label>
+                                </div>
+                                <div class="form__group">
+                                    <label class="form__label">
+                                        <input type="password" class="form__input" id="password" placeholder="Password" required>
+                                        <img src="images/Hide.png" alt="hide" class="form__input-img">
+                                    </label>
+                                </div>
+                            <div class="form__group">
+                                <button type="submit" class="form__btn">Login</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
             </li>
+
         </ul>
-        
     </nav>
+    <div>
+        
+    </div>
+
+
 
 
 </header>
@@ -290,7 +334,8 @@
         </div>
         <div class="modal" id="my-modal">
             <div class="modal__box">
-                <button class="modal__close-btn" id="close-my-modal-btn">
+                <form action="/service-order" method="POST">
+                <button type="button" class="modal__close-btn" id="close-my-modal-btn">
                     <svg width="12" height="12" viewBox="0 0 23 25" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
                               fill="#333333"/>
@@ -392,7 +437,7 @@
                 <p class="order-text-p">Your order is currently being processed. You will receive an order confirmat
                     ion email shortly with the expected delivery date for your items.</p>
 
-                <form action="/service-order" method="POST">
+
 
                     <input type="hidden" name="userToken" value="{{ session.user.token }}">
 

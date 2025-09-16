@@ -74,7 +74,7 @@ nav a.active {
     justify-content: center;
     gap: calc(var(--container-pading)*0.3);;
     line-height: normal;
-
+font-family: "CeraPro", sans-serif;
     text-decoration: none;
     font-size: var(--container-font-size);
     font-weight: 500;

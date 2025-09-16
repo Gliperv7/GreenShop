@@ -1,4 +1,4 @@
-.modal {
+.modal , .modal-login {
     position: fixed;
     left: 0;
     top: 0;
@@ -24,6 +24,18 @@
     background-color: var(--text-color-white);
     box-shadow: 0 0 17px -7px var(--modal-background-color);
     transform: scale(0);
+    transition: transform .8s;
+    border-bottom:10px solid var(--primary-color) ;
+}
+.modal__box-login{
+    position: relative;
+    width: var(--modal-weidght-login);
+    height: var(--modal-height-login);
+    z-index: 1;
+    margin: 30px 15px;
+    background-color: var(--text-color-white);
+    box-shadow: 0 0 17px -7px var(--modal-background-color);
+
     transition: transform .8s;
     border-bottom:10px solid var(--primary-color) ;
 }
@@ -194,4 +206,86 @@ padding: 0 10px;
     white-space: nowrap;
     color: var(--text-color-white);
     font-size: var(--container-font-size);
+}
+.modal__box-login-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin: calc(var(--container-pading)*4.5) auto;
+}
+.modal__box-login-form__text{
+    font-size: var(--container-font-size-bold-max);
+
+}
+.modal__box-login-form__text:first-child{
+    color: var(--primary-color) ;
+    font-weight: bold;
+}
+.modal__box-login-form__text:last-child{
+    font-weight: bold;
+    color: var(--secondary-color) ;
+}
+.modal__box-login-form__center{
+    font-size: var(--container-font-size-bold);
+    font-weight: 250;
+    color: var(--secondary-color)
+}
+.modal__box-login-form-text__modification{
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: var(--container-font-size-small-extra);
+}
+.modal__box-login-form__modification{
+    justify-content: center;
+    margin-bottom: var(--container-pading);
+}
+.form{
+
+}
+
+.form__group {
+    display: flex;
+    justify-content: center;
+    margin:0 0 var(--container-font-size) 0;
+}
+
+.form__label {
+    display: block;
+    position: relative;
+}
+
+.form__input {
+    width: calc(var(--container-padded-size)*3);
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form__icon {
+    position: absolute;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    fill: #888;
+}
+
+.form__btn {
+
+    width: calc(var(--container-padded-size)*3);
+    margin: 0 auto;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form__btn:hover {
+    background-color: #218838;
 }
