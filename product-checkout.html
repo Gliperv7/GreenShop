@@ -54,8 +54,9 @@
                 </a>
             </li>
             <li class="header-nav-list-item">
-                <button class="header-nav-list-item-action header-nav-list-item-action-btn" id="modal-login--open" >
-                    <span class="header-nav-list-item-action-btn-span"><img src="images/Logout.png" alt="login" class="header-nav-list-item-img"></span>
+                <button class="header-nav-list-item-action header-nav-list-item-action-btn" id="modal-login--open">
+                    <span class="header-nav-list-item-action-btn-span"><img src="images/Logout.png" alt="login"
+                                                                            class="header-nav-list-item-img"></span>
                     Login
                 </button>
 
@@ -66,7 +67,8 @@
                                 <svg width="12" height="12" viewBox="0 0 23 25" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
                                           fill="#333333"/>
-                                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333"/>
+                                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z"
+                                          fill="#333333"/>
                                 </svg>
                             </button>
                             <div class="modal__box-login-form">
@@ -75,23 +77,28 @@
                                 <span class="modal__box-login-form__text">Register</span>
                             </div>
                             <div class="modal__box-login-form modal__box-login-form__modification">
-                              <span class="modal__box-login-form__text modal__box-login-form-text__modification">Enter your username and password to login.</span>
+                                <span class="modal__box-login-form__text modal__box-login-form-text__modification">Enter your username and password to login.</span>
                             </div>
 
-                                <div class="form__group">
-                                    <label class="form__label">
-                                        <input type="email" class="form__input" placeholder="Email" required>
-                                    </label>
-                                </div>
-                                <div class="form__group">
-                                    <label class="form__label">
-                                        <input type="password" class="form__input" id="password" placeholder="Password" required>
-                                        <img src="images/Hide.png" alt="hide" class="form__input-img">
-                                    </label>
-                                </div>
+                            <div class="form__group">
+                                <label class="form__label">
+                                    <input type="email" class="form__input" placeholder="Email" required>
+                                </label>
+                            </div>
+
+                            <label class="form__group field">
+                                <input type="password" class="field__input" id="password" placeholder="Password" required>
+                                <img src="images/Hide.png" alt="hide" class="field__icon" id="togglePassword">
+                            </label>
+                            <a href="#" class="field__link">Forgot password?</a>
+
                             <div class="form__group">
                                 <button type="submit" class="form__btn">Login</button>
                             </div>
+                            <div class="login-or">
+                                <p class="login-or-text">Or login with</p>
+                            </div>
+
 
                         </form>
 
@@ -102,10 +109,8 @@
         </ul>
     </nav>
     <div>
-        
+
     </div>
-
-
 
 
 </header>
@@ -335,108 +340,109 @@
         <div class="modal" id="my-modal">
             <div class="modal__box">
                 <form action="/service-order" method="POST">
-                <button type="button" class="modal__close-btn" id="close-my-modal-btn">
-                    <svg width="12" height="12" viewBox="0 0 23 25" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
-                              fill="#333333"/>
-                        <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333"/>
-                    </svg>
-                </button>
-                <img class="modal-img" src="images/Group.png" alt="Thank-you">
-                <p class="modal-text__p">Your order has been received</p>
-                <div class="modal-order-details">
-                    <div>
-                        <p class="modal-order-details__p">Order Number</p>
-                        <p class="modal-order-details__bold">19586687</p>
+                    <button type="button" class="modal__close-btn" id="close-my-modal-btn">
+                        <svg width="12" height="12" viewBox="0 0 23 25" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
+                                  fill="#333333"/>
+                            <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z"
+                                  fill="#333333"/>
+                        </svg>
+                    </button>
+                    <img class="modal-img" src="images/Group.png" alt="Thank-you">
+                    <p class="modal-text__p">Your order has been received</p>
+                    <div class="modal-order-details">
+                        <div>
+                            <p class="modal-order-details__p">Order Number</p>
+                            <p class="modal-order-details__bold">19586687</p>
+                        </div>
+                        <div class="order-border-left">
+                            <p class="modal-order-details__p">Date</p>
+                            <p class="modal-order-details__bold">15 Sep, 2021</p>
+                        </div>
+                        <div class="order-border-left">
+                            <p class="modal-order-details__p">Total</p>
+                            <p class="modal-order-details__bold">2,699.00</p>
+                        </div>
+                        <div class="order-border-left">
+                            <p class="modal-order-details__p">Payment Method</p>
+                            <p class="modal-order-details__bold">Cash on delivery</p>
+                        </div>
                     </div>
-                    <div class="order-border-left">
-                        <p class="modal-order-details__p">Date</p>
-                        <p class="modal-order-details__bold">15 Sep, 2021</p>
-                    </div>
-                    <div class="order-border-left">
-                        <p class="modal-order-details__p">Total</p>
-                        <p class="modal-order-details__bold">2,699.00</p>
-                    </div>
-                    <div class="order-border-left">
-                        <p class="modal-order-details__p">Payment Method</p>
-                        <p class="modal-order-details__bold">Cash on delivery</p>
-                    </div>
-                </div>
 
-                <table class="table__modificator table__modificator--width ">
+                    <table class="table__modificator table__modificator--width ">
 
-                    <tr class="table__modificator__row">
-                        <div class="product-name product-name__modificator">Order Details</div>
-                        <td class="layout__spacer table__modificator--border">
+                        <tr class="table__modificator__row">
+                            <div class="product-name product-name__modificator">Order Details</div>
+                            <td class="layout__spacer table__modificator--border">
 
-                            <div class="product-info">
-                                <div class="sku-modificator">
-                                    <div class="sku text-fonts ">Products</div>
+                                <div class="product-info">
+                                    <div class="sku-modificator">
+                                        <div class="sku text-fonts ">Products</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="price-one text-fonts table__modificator--border td__modificator--width-qty">Qty</td>
-                        <td class="total-price text-fonts table__modificator--border">Subtotal</td>
-                    </tr>
-                </table>
+                            </td>
+                            <td class="price-one text-fonts table__modificator--border td__modificator--width-qty">Qty
+                            </td>
+                            <td class="total-price text-fonts table__modificator--border">Subtotal</td>
+                        </tr>
+                    </table>
 
-                <table class="table__modificator table__modificator--width">
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="images/small_images24.png" alt="daisy">
-                                <div class="sku-modificator">
-                                    <div class="product-name">Barberton Daisy</div>
-                                    <div class="sku">SKU: 1995751877966</div>
+                    <table class="table__modificator table__modificator--width">
+                        <tr>
+                            <td>
+                                <div class="product-info">
+                                    <img src="images/small_images24.png" alt="daisy">
+                                    <div class="sku-modificator">
+                                        <div class="product-name">Barberton Daisy</div>
+                                        <div class="sku">SKU: 1995751877966</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="price-one">(x2)</td>
-                        <td class="total-price">$238.00</td>
+                            </td>
+                            <td class="price-one">(x2)</td>
+                            <td class="total-price">$238.00</td>
 
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="images/product5.png" alt="blushing">
-                                <div class="sku-modificator">
-                                    <div class="product-name">Blushing Bromeliad</div>
-                                    <div class="sku">SKU: 19957518757065</div>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-info">
+                                    <img src="images/product5.png" alt="blushing">
+                                    <div class="sku-modificator">
+                                        <div class="product-name">Blushing Bromeliad</div>
+                                        <div class="sku">SKU: 19957518757065</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="price-one">(x6)</td>
-                        <td class="total-price">$834.00</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="images/product6.png" alt="plant">
-                                <div class="sku-modificator">
-                                    <div class="product-name">Aluminum Plant</div>
-                                    <div class="sku">SKU: 1995751877786</div>
+                            </td>
+                            <td class="price-one">(x6)</td>
+                            <td class="total-price">$834.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="product-info">
+                                    <img src="images/product6.png" alt="plant">
+                                    <div class="sku-modificator">
+                                        <div class="product-name">Aluminum Plant</div>
+                                        <div class="sku">SKU: 1995751877786</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="price-one">(x9)</td>
-                        <td class="total-price">$1,611.00</td>
-                    </tr>
-                </table>
+                            </td>
+                            <td class="price-one">(x9)</td>
+                            <td class="total-price">$1,611.00</td>
+                        </tr>
+                    </table>
 
-                <div class="order-checkout">
+                    <div class="order-checkout">
 
-                    <div class=" checkout--total__modificator">
-                        <span class="checkout-total-label__modificator">Shipping</span>
-                        <span class="checkout-total-value__modificator">$16.00</span>
+                        <div class=" checkout--total__modificator">
+                            <span class="checkout-total-label__modificator">Shipping</span>
+                            <span class="checkout-total-value__modificator">$16.00</span>
+                        </div>
+                        <div class=" checkout--total__modificator checkout--total__border">
+                            <span class="checkout__total-label checkout-total-label__modificator checkout__total__modificator">Total</span>
+                            <span class="checkout__total-value checkout__total-value_modificator">$2,699.00</span>
+                        </div>
                     </div>
-                    <div class=" checkout--total__modificator checkout--total__border">
-                        <span class="checkout__total-label checkout-total-label__modificator checkout__total__modificator">Total</span>
-                        <span class="checkout__total-value checkout__total-value_modificator">$2,699.00</span>
-                    </div>
-                </div>
-                <p class="order-text-p">Your order is currently being processed. You will receive an order confirmat
-                    ion email shortly with the expected delivery date for your items.</p>
-
+                    <p class="order-text-p">Your order is currently being processed. You will receive an order confirmat
+                        ion email shortly with the expected delivery date for your items.</p>
 
 
                     <input type="hidden" name="userToken" value="{{ session.user.token }}">

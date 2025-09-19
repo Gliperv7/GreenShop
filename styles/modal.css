@@ -235,13 +235,12 @@ padding: 0 10px;
     white-space: nowrap;
     font-weight: 400;
     font-size: var(--container-font-size-small-extra);
+    width: 266px;
+    color: var(--secondary-color) ;
 }
 .modal__box-login-form__modification{
     justify-content: center;
     margin-bottom: var(--container-pading);
-}
-.form{
-
 }
 
 .form__group {
@@ -257,35 +256,69 @@ padding: 0 10px;
 
 .form__input {
     width: calc(var(--container-padded-size)*3);
-    padding: 12px 40px 12px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: var( --container-font-size-small) calc(var(--container-pading)*4) var( --container-font-size-small) var( --container-font-size-small);
+
+    border-radius: calc(var(--container-font-size-small)/2);
+    font-size: var(--container-font-size-medium-extra);
 }
 
 .form__icon {
     position: absolute;
-    right: 12px;
+    right: var(--container-font-size-small);
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
+    width: calc(var(--container-pading)*2);
+    height: calc(var(--container-pading)*2);
     cursor: pointer;
-    fill: #888;
+     fill: var(--imput-color);
 }
 
 .form__btn {
 
     width: calc(var(--container-padded-size)*3);
     margin: 0 auto;
-    padding: 12px;
+    padding: var(--container-font-size-small);
     border: none;
-    border-radius: 6px;
-    background-color: #28a745;
-    color: #fff;
-    font-size: 16px;
+    border-radius: calc(var(--container-font-size-small)/2);
+    background-color: var(--primary-color);
+    color: var(--imput-color);
+    font-size: var( --container-font-size);
     cursor: pointer;
 }
 
 .form__btn:hover {
-    background-color: #218838;
+    background-color: var(--primary-color);
+}
+.field {
+    position: relative;
+}
+
+.field__input {
+
+    height: calc(var(--container-pading)*4);
+    width: calc(var(--container-padded-size)*3);
+    font-size: 14px;
+
+}
+
+.field__icon {
+    position: absolute;
+    right:110px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.field__link{
+    display: flex;
+    justify-content: right;
+    width: calc(var(--container-padded-size)*4);
+    color: var(--primary-color);
+    padding: 0 0 calc(var(--container-pading)*3) 0;
+}
+.login-or{
+    margin: 0 auto;
+    width: calc(var(--container-padded-size)*3);
+    text-align: center;
+    border-bottom: 1px solid var(--secondary-background);
 }
