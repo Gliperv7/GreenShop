@@ -16,3 +16,9 @@
     font-weight: 900;
     font-style: normal;
 }
+@font-face {
+    font-family: 'CeraProMedium';
+    src: url('../fonts/CeraPro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
