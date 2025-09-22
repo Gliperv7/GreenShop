@@ -216,6 +216,8 @@ padding: 0 10px;
 }
 .modal__box-login-form__text{
     font-size: var(--container-font-size-bold-max);
+    border: unset ;
+    font-family: "CeraPro", sans-serif;
 
 }
 .modal__box-login-form__text:first-child{
@@ -351,9 +353,6 @@ padding: 0 10px;
 .form__input:focus ,.field__input:focus {
     border: 2px solid green;
 }
-.form__group-modification{
-
-}
 .form__btn-modification{
     background-color: var(--text-color-white) ;
     border: 1px solid var(--secondary-background) ;
@@ -367,4 +366,18 @@ padding: 0 10px;
 }
 .form__btn-modification span{
     padding: 0 10px;
+}
+.modal__box-login__modification{
+    height: var(--modal-height-register);
+}
+.modal__box-login-form__text-modification:first-child{
+    color: var(--secondary-color) ;
+    font-weight: bold;
+}
+.modal__box-login-form__text-modification:last-child{
+    font-weight: bold;
+    color: var(--primary-color) ;
+}
+.form__group-padding{
+    margin: calc(var(--container-pading)*4.5) 0 0 0;
 }

@@ -72,9 +72,9 @@
                                 </svg>
                             </button>
                             <div class="modal__box-login-form">
-                                <span class="modal__box-login-form__text">Login</span>
+                                <button class="modal__box-login-form__text">Login</button>
                                 <span class="modal__box-login-form__text modal__box-login-form__center">I</span>
-                                <span class="modal__box-login-form__text">Register</span>
+                                <button class="modal__box-login-form__text">Register</button>
                             </div>
                             <div class="modal__box-login-form modal__box-login-form__modification">
                                 <span class="modal__box-login-form__text modal__box-login-form-text__modification">Enter your username and password to login.</span>
@@ -97,6 +97,67 @@
                             </div>
                             <div class="login-or">
                                 <span class="login-or-text">Or login with</span>
+                            </div>
+                            <div class="form__group form__group-modification">
+                                <a type="submit" class="form__btn form__btn-modification">
+                                    <img src="images/google%201.png" alt="google"> <span>Login with Google</span> </a>
+                            </div>
+                            <div class="form__group form__group-modification">
+                                <a type="submit" class="form__btn form__btn-modification">
+                                    <img src="images/FacebookBlue.png" alt="facebook"> <span>Login with Facebook</span>
+                                </a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+                <div class="modal" id="modal-Register">
+                    <div class="modal__box-login modal__box-login__modification">
+                        <form action="/service-order" method="POST">
+                            <button type="button" class="modal__close-btn" id="close--modal-btn-Register">
+                                <svg width="12" height="12" viewBox="0 0 23 25" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
+                                          fill="#333333"/>
+                                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z"
+                                          fill="#333333"/>
+                                </svg>
+                            </button>
+                            <div class="modal__box-login-form">
+                                <button class="modal__box-login-form__text modal__box-login-form__text-modification">Login</button>
+                                <span class="modal__box-login-form__text modal__box-login-form__center">I</span>
+                                <button class="modal__box-login-form__text modal__box-login-form__text-modification">Register</button>
+                            </div>
+                            <div class="modal__box-login-form modal__box-login-form__modification">
+                                <span class="modal__box-login-form__text modal__box-login-form-text__modification">Enter your email and password to register.</span>
+                            </div>
+
+                            <div class="form__group">
+                                <label class="form__label">
+                                    <input type="text" name="username" class="form__input" placeholder="Username" required>
+                                </label>
+                            </div>
+                            <div class="form__group">
+                                <label class="form__label">
+                                    <input type="email" name="email" class="form__input" placeholder="Enter your email address" required>
+                                </label>
+                            </div>
+
+                            <label class="form__group field">
+                                <input type="password" class="field__input" id="password-register" placeholder="Password" required>
+                                <img src="images/Hide.png" alt="hide" class="field__icon" id="togglePassword-register">
+                            </label>
+                            <div class="form__group">
+                                <label class="form__label">
+                                    <input type="password" name="confirm_password" class="form__input" placeholder="Confirm Password" required>
+                                </label>
+                            </div>
+
+                            <div class="form__group form__group-padding">
+                                <button type="submit" class="form__btn">Register</button>
+                            </div>
+                            <div class="login-or">
+                                <span class="login-or-text">Or Register with</span>
                             </div>
                             <div class="form__group form__group-modification">
                                 <a type="submit" class="form__btn form__btn-modification">
