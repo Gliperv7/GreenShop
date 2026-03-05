@@ -1,0 +1,217 @@
+---
+import ProductCard from "./ProductCard.astro";
+import { products } from "../data/products";
+
+const categories = [
+  { label: "All", value: "All" as const },
+  { label: "House Plants", value: "Plants" as const },
+  { label: "Seeds", value: "Seeds" as const },
+  { label: "Accessories", value: "Accessories" as const },
+];
+
+const priceMin = Math.min(...products.map((item) => item.price));
+const priceMax = Math.max(...products.map((item) => item.price));
+
+const sizeCounts = {
+  S: products.filter((item) => item.size === "S").length,
+  M: products.filter((item) => item.size === "M").length,
+  L: products.filter((item) => item.size === "L").length,
+};
+---
+
+<section class="home-catalog" aria-label="Catalog" data-home-catalog>
+  <aside class="catalog-sidebar" data-testid="catalog-sidebar">
+    <h2 class="catalog-sidebar__title">Categories</h2>
+    <ul class="catalog-sidebar__list">
+      {categories.map((category, index) => (
+        <li class="catalog-sidebar__item">
+          <button
+            class={index === 1 ? "catalog-sidebar__link catalog-sidebar__link--active" : "catalog-sidebar__link"}
+            type="button"
+            data-home-category={category.value}
+          >
+            {category.label}
+          </button>
+          <span class="catalog-sidebar__count">
+            ({category.value === "All" ? products.length : products.filter((item) => item.category === category.value).length})
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="catalog-sidebar__subtitle">Price Range</h3>
+    <label class="catalog-sidebar__price-range">
+      <span>
+        Price: <strong>$<span data-home-price-min>{priceMin}</span> - $<span data-home-price-value>{priceMax}</span></strong>
+      </span>
+      <input data-home-price type="range" min={priceMin} max={priceMax} value={priceMax} />
+    </label>
+    <button class="c-button c-button--filter" type="button" data-home-price-apply>Filter</button>
+
+    <h3 class="catalog-sidebar__subtitle">Size</h3>
+    <ul class="catalog-sidebar__list catalog-sidebar__list--sizes">
+      <li class="catalog-sidebar__item">
+        <button class="catalog-sidebar__link catalog-sidebar__link--active" type="button" data-home-size-btn="S">Small</button>
+        <span class="catalog-sidebar__count">({sizeCounts.S})</span>
+      </li>
+      <li class="catalog-sidebar__item">
+        <button class="catalog-sidebar__link catalog-sidebar__link--active" type="button" data-home-size-btn="M">Medium</button>
+        <span class="catalog-sidebar__count">({sizeCounts.M})</span>
+      </li>
+      <li class="catalog-sidebar__item">
+        <button class="catalog-sidebar__link catalog-sidebar__link--active" type="button" data-home-size-btn="L">Large</button>
+        <span class="catalog-sidebar__count">({sizeCounts.L})</span>
+      </li>
+    </ul>
+
+    <div class="catalog-sidebar__sale" aria-label="Super sale">
+      <p class="catalog-sidebar__sale-title">Super Sale</p>
+      <p class="catalog-sidebar__sale-sub">UP TO 75% OFF</p>
+      <img src="/assets/figma-all/images/image-12-4-379.png" alt="Sale plants" />
+    </div>
+  </aside>
+
+  <div class="catalog-main" data-testid="products-section">
+    <div class="catalog-main__top">
+      <ul class="filters" aria-label="Product categories">
+        <li><button class="filters__item filters__item--active" type="button" data-home-badge="">All Plants</button></li>
+        <li><button class="filters__item" type="button" data-home-badge="New">New Arrivals</button></li>
+        <li><button class="filters__item" type="button" data-home-badge="Sale">Sale</button></li>
+      </ul>
+      <label class="shop-sort">
+        Short by:
+        <select data-home-sort>
+          <option value="default">Default sorting</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name-asc">Name A-Z</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="section-heading__text" data-home-results data-testid="home-results-count">8 products found</p>
+
+    <div class="l-grid l-grid--products" data-home-grid>
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const section = document.querySelector("[data-home-catalog]");
+    if (!section) return;
+
+    const cards = Array.from(section.querySelectorAll("[data-product-card]"));
+    if (!cards.length) return;
+
+    const priceInput = section.querySelector("[data-home-price]");
+    const priceApply = section.querySelector("[data-home-price-apply]");
+    const priceValue = section.querySelector("[data-home-price-value]");
+    const resultText = section.querySelector("[data-home-results]");
+    const sortSelect = section.querySelector("[data-home-sort]");
+    const badgeButtons = Array.from(section.querySelectorAll("[data-home-badge]"));
+    const categoryButtons = Array.from(section.querySelectorAll("[data-home-category]"));
+    const sizeButtons = Array.from(section.querySelectorAll("[data-home-size-btn]"));
+    const grid = section.querySelector("[data-home-grid]");
+
+    let activeBadge = "";
+    let activeCategory = "Plants";
+    let maxPrice = Number(priceInput?.value || 99999);
+    const activeSizes = new Set(["S", "M", "L"]);
+    cards.forEach((card, index) => card.setAttribute("data-home-index", String(index)));
+
+    const apply = () => {
+      const visibleCards = [];
+      const hiddenCards = [];
+
+      cards.forEach((card) => {
+        const badge = card.getAttribute("data-badge") || "";
+        const category = card.getAttribute("data-category") || "";
+        const size = card.getAttribute("data-size") || "";
+        const price = Number(card.getAttribute("data-price") || 0);
+
+        const passBadge = !activeBadge || badge === activeBadge;
+        const passCategory = activeCategory === "All" || category === activeCategory;
+        const passSize = activeSizes.has(size);
+        const passPrice = price <= maxPrice;
+
+        const visible = passBadge && passCategory && passSize && passPrice;
+        card.style.display = visible ? "block" : "none";
+        if (visible) visibleCards.push(card);
+        else hiddenCards.push(card);
+      });
+
+      if (grid) {
+        const sortedVisible = [...visibleCards].sort((a, b) => {
+          const indexA = Number(a.getAttribute("data-home-index") || 0);
+          const indexB = Number(b.getAttribute("data-home-index") || 0);
+          if (!sortSelect || sortSelect.value === "default") return indexA - indexB;
+
+          const nameA = a.getAttribute("data-name") || "";
+          const nameB = b.getAttribute("data-name") || "";
+          const priceA = Number(a.getAttribute("data-price") || 0);
+          const priceB = Number(b.getAttribute("data-price") || 0);
+
+          if (sortSelect.value === "price-asc") return priceA - priceB;
+          if (sortSelect.value === "price-desc") return priceB - priceA;
+          if (sortSelect.value === "name-asc") return nameA.localeCompare(nameB);
+          return 0;
+        });
+        [...sortedVisible, ...hiddenCards].forEach((card) => grid.appendChild(card));
+      }
+
+      if (resultText) resultText.textContent = `${visibleCards.length} products found`;
+      if (priceValue) priceValue.textContent = String(maxPrice);
+    };
+
+    badgeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeBadge = button.getAttribute("data-home-badge") || "";
+        badgeButtons.forEach((item) => item.classList.remove("filters__item--active"));
+        button.classList.add("filters__item--active");
+        apply();
+      });
+    });
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeCategory = button.getAttribute("data-home-category") || "All";
+        categoryButtons.forEach((item) => item.classList.remove("catalog-sidebar__link--active"));
+        button.classList.add("catalog-sidebar__link--active");
+        apply();
+      });
+    });
+
+    sizeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.getAttribute("data-home-size-btn");
+        if (!value) return;
+
+        if (activeSizes.has(value)) {
+          activeSizes.delete(value);
+        } else {
+          activeSizes.add(value);
+        }
+
+        if (activeSizes.size === 0) activeSizes.add(value);
+
+        button.classList.toggle("catalog-sidebar__link--active", activeSizes.has(value));
+        apply();
+      });
+    });
+
+    priceInput?.addEventListener("input", () => {
+      if (priceValue) priceValue.textContent = String(priceInput.value);
+    });
+
+    priceApply?.addEventListener("click", () => {
+      maxPrice = Number(priceInput?.value || 99999);
+      apply();
+    });
+
+    sortSelect?.addEventListener("change", apply);
+
+    apply();
+  })();
+</script>

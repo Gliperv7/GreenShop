@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CheckoutPanel from "../components/CheckoutPanel.astro";
+---
+
+<Layout title="Checkout | GreenShop" description="Complete billing and payment details to place your order." pathname="/checkout">
+  <div class="l-container l-stack">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: "Checkout" }]} />
+    <CheckoutPanel />
+  </div>
+</Layout>

@@ -1,0 +1,213 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ProductGrid from "../../components/ProductGrid.astro";
+import { productById, products } from "../../data/products";
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { productId: product.id },
+  }));
+}
+
+const { productId } = Astro.props;
+const product = productById.get(productId);
+
+if (!product) {
+  throw new Error(`Product not found: ${productId}`);
+}
+
+const related = products.filter((item) => item.id !== product.id).slice(0, 5);
+const gallery = [product.image, related[0]?.image ?? product.image, related[1]?.image ?? product.image, related[2]?.image ?? product.image];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: product.name,
+  sku: product.sku,
+  image: `https://greenshop.example${product.image}`,
+  description: product.description,
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "USD",
+    price: product.price,
+    availability: "https://schema.org/InStock",
+  },
+};
+---
+
+<Layout
+  title={`${product.name} | GreenShop`}
+  description={product.description}
+  pathname={`/shop/${product.id}`}
+  type="article"
+  structuredData={structuredData}
+>
+  <div class="l-container l-stack">
+    <Breadcrumbs
+      items={[
+        { label: "Home", href: "/" },
+        { label: "Shop", href: "/shop" },
+        { label: product.name },
+      ]}
+    />
+
+    <section class="product-view" data-testid="product-view">
+      <div class="product-view__gallery">
+        <div class="product-view__thumbs product-view__thumbs--vertical">
+          {gallery.map((image, index) => (
+            <button
+              type="button"
+              class={index === 0 ? "product-view__thumb-btn product-view__thumb-btn--active" : "product-view__thumb-btn"}
+              data-thumb-btn
+              data-image={image}
+            >
+              <img src={image} alt={`${product.name} thumb ${index + 1}`} />
+            </button>
+          ))}
+        </div>
+        <img src={product.image} alt={`${product.name} large`} class="product-view__main" data-main-image />
+      </div>
+
+      <article class="product-view__info">
+        <h1>{product.name}</h1>
+        <p class="product-view__price">
+          ${product.price.toFixed(2)}
+          {product.oldPrice && <span class="product-card__price-old">${product.oldPrice.toFixed(2)}</span>}
+        </p>
+        <p class="product-view__rating"><span>⭐⭐⭐⭐☆</span> <small>19 Customer Review</small></p>
+        <p class="section-heading__text">
+          {product.description} The ceramic cylinder planters come with a wooden stand to help elevate your plants.
+        </p>
+
+        <div class="product-view__sizes" aria-label="Choose size">
+          <strong>Size:</strong>
+          <button class={product.size === "S" ? "chip chip--active" : "chip"} type="button" data-size-btn>S</button>
+          <button class={product.size === "M" ? "chip chip--active" : "chip"} type="button" data-size-btn>M</button>
+          <button class={product.size === "L" ? "chip chip--active" : "chip"} type="button" data-size-btn>L</button>
+        </div>
+
+        <div class="product-view__actions">
+          <div class="product-view__qty">
+            <button class="qty-btn" type="button" aria-label="Decrease" data-qty-decrease>-</button>
+            <span class="qty-value" data-qty-value>1</span>
+            <button class="qty-btn" type="button" aria-label="Increase" data-qty-increase>+</button>
+          </div>
+          <a class="c-button" href="/checkout">BUY NOW</a>
+          <button class="c-button c-button--ghost" type="button" data-add-to-cart>Add to cart</button>
+          <button class="product-view__wishlist" type="button" aria-label="Add to wishlist">♡</button>
+        </div>
+
+        <ul class="l-stack product-view__meta" aria-label="Product details">
+          <li><strong>SKU:</strong> {product.sku}</li>
+          <li><strong>Categories:</strong> {product.category}</li>
+          <li><strong>Size:</strong> {product.size}</li>
+          <li><strong>Tags:</strong> Home, Garden, Plants</li>
+          <li><strong>Share this products:</strong> <span>F</span> <span>T</span> <span>In</span> <span>Mail</span></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="product-tabs" data-product-tabs>
+      <div class="product-tabs__head">
+        <button class="product-tabs__tab product-tabs__tab--active" type="button" data-tab="description">Product Description</button>
+        <button class="product-tabs__tab" type="button" data-tab="reviews">Reviews (19)</button>
+      </div>
+      <div class="product-tabs__body product-tabs__body--active" data-tab-panel="description">
+        <p>The ceramic cylinder planters come with a wooden stand to help elevate your plants off the ground.</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at
+          libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu.
+        </p>
+        <h3>Living Room:</h3>
+        <p>
+          The ceramic cylinder planters come with a wooden stand to help elevate your plants off the ground. The ceramic cylinder
+          planters come with a wooden stand to help elevate your plants off the ground.
+        </p>
+        <h3>Dining Room:</h3>
+        <p>
+          The benefits of houseplants are endless. In addition to cleaning the air of harmful toxins, they can help to improve your
+          mood and reduce stress and anxiety.
+        </p>
+      </div>
+      <div class="product-tabs__body" data-tab-panel="reviews">
+        <p>19 customer reviews with average rating 4.8. Most buyers mention premium leaves quality and safe packaging.</p>
+      </div>
+    </section>
+
+    <ProductGrid products={related} heading="Releted Products" description="" />
+  </div>
+</Layout>
+
+<script is:inline>
+  (() => {
+    const scope = document.querySelector("[data-testid='product-view']");
+    if (!scope) return;
+
+    const mainImage = scope.querySelector("[data-main-image]");
+    const thumbButtons = Array.from(scope.querySelectorAll("[data-thumb-btn]"));
+    const sizeButtons = Array.from(scope.querySelectorAll("[data-size-btn]"));
+    const qtyValue = scope.querySelector("[data-qty-value]");
+    const decrease = scope.querySelector("[data-qty-decrease]");
+    const increase = scope.querySelector("[data-qty-increase]");
+    const addToCart = scope.querySelector("[data-add-to-cart]");
+    let qty = 1;
+
+    thumbButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const image = button.getAttribute("data-image");
+        if (mainImage && image) mainImage.setAttribute("src", image);
+        thumbButtons.forEach((item) => item.classList.remove("product-view__thumb-btn--active"));
+        button.classList.add("product-view__thumb-btn--active");
+      });
+    });
+
+    sizeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        sizeButtons.forEach((item) => item.classList.remove("chip--active"));
+        button.classList.add("chip--active");
+      });
+    });
+
+    const renderQty = () => {
+      if (qtyValue) qtyValue.textContent = String(qty);
+    };
+
+    decrease?.addEventListener("click", () => {
+      qty = Math.max(1, qty - 1);
+      renderQty();
+    });
+
+    increase?.addEventListener("click", () => {
+      qty += 1;
+      renderQty();
+    });
+
+    addToCart?.addEventListener("click", () => {
+      if (window.GreenShopCart) {
+        window.GreenShopCart.add("${product.id}", qty);
+      }
+      addToCart.textContent = "Added";
+      setTimeout(() => {
+        addToCart.textContent = "Add to cart";
+      }, 1200);
+    });
+  })();
+
+  (() => {
+    const tabsScope = document.querySelector("[data-product-tabs]");
+    if (!tabsScope) return;
+    const tabs = Array.from(tabsScope.querySelectorAll("[data-tab]"));
+    const panels = Array.from(tabsScope.querySelectorAll("[data-tab-panel]"));
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.getAttribute("data-tab");
+        tabs.forEach((item) => item.classList.remove("product-tabs__tab--active"));
+        panels.forEach((panel) => panel.classList.remove("product-tabs__body--active"));
+        tab.classList.add("product-tabs__tab--active");
+        tabsScope.querySelector(`[data-tab-panel='${target}']`)?.classList.add("product-tabs__body--active");
+      });
+    });
+  })();
+</script>

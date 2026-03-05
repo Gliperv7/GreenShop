@@ -1,0 +1,36 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<article
+  class="product-card"
+  data-testid="product-card"
+  data-product-card
+  data-name={product.name.toLowerCase()}
+  data-category={product.category}
+  data-size={product.size}
+  data-badge={product.badge ?? ""}
+  data-price={product.price}
+>
+  <a class="product-card__link" href={`/shop/${product.id}`} aria-label={`View ${product.name}`}>
+    <div class="product-card__image-wrap">
+      {product.badge && <span class="product-card__badge">{product.badge}</span>}
+      <img src={product.image} alt={product.name} width="210" height="210" loading="lazy" />
+    </div>
+    <h3 class="product-card__title">{product.name}</h3>
+    <p class="product-card__meta">{product.category}</p>
+    <p class="product-card__price">
+      <span>${product.price.toFixed(2)}</span>
+      {product.oldPrice && <span class="product-card__price-old">${product.oldPrice.toFixed(2)}</span>}
+    </p>
+  </a>
+  <button class="product-card__add" type="button" data-add-product={product.id} data-add-qty="1">
+    Add to cart
+  </button>
+</article>

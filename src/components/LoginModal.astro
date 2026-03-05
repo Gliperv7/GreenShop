@@ -1,0 +1,30 @@
+<div class="auth-modal" data-auth-modal hidden>
+  <button class="auth-modal__backdrop" type="button" aria-label="Close login modal" data-auth-close></button>
+  <section class="auth-modal__panel" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" data-auth-panel>
+    <button class="auth-modal__close" type="button" aria-label="Close" data-auth-close>×</button>
+    <div class="auth-modal__tabs">
+      <button class="auth-modal__tab auth-modal__tab--active" type="button" data-auth-tab="login">Login</button>
+      <span>|</span>
+      <button class="auth-modal__tab" type="button" data-auth-tab="register">Register</button>
+    </div>
+
+    <form class="auth-modal__form auth-modal__form--active" data-auth-form="login">
+      <h2 id="auth-modal-title">Login</h2>
+      <p class="section-heading__text">Enter your email and password to login.</p>
+      <input name="email" type="email" placeholder="Enter your email address" required />
+      <input name="password" type="password" placeholder="Password" required minlength="6" />
+      <button class="c-button" type="submit">Login</button>
+      <a class="auth-modal__forgot" href="#">Forgot Password?</a>
+    </form>
+
+    <form class="auth-modal__form" data-auth-form="register">
+      <h2>Register</h2>
+      <p class="section-heading__text">Enter your details to create an account.</p>
+      <input name="username" type="text" placeholder="Username" required />
+      <input name="email" type="email" placeholder="Enter your email address" required />
+      <input name="password" type="password" placeholder="Password" required minlength="6" />
+      <input name="confirmPassword" type="password" placeholder="Confirm Password" required minlength="6" />
+      <button class="c-button" type="submit">Register</button>
+    </form>
+  </section>
+</div>

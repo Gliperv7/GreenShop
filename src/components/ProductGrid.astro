@@ -1,0 +1,33 @@
+---
+import ProductCard from "./ProductCard.astro";
+import type { Product } from "../data/products";
+
+interface Props {
+  products: Product[];
+  heading: string;
+  description: string;
+  showFilters?: boolean;
+}
+
+const { products, heading, description, showFilters = false } = Astro.props;
+---
+
+<section aria-labelledby="products-heading" data-testid="products-section">
+  <div class="section-heading">
+    <h2 id="products-heading" class="section-heading__title">{heading}</h2>
+    {description && <p class="section-heading__text">{description}</p>}
+  </div>
+
+  {showFilters && (
+    <ul class="filters" aria-label="Product categories">
+      <li><span class="filters__item filters__item--active">All Plants</span></li>
+      <li><span class="filters__item">New Arrivals</span></li>
+      <li><span class="filters__item">Sale</span></li>
+      <li><span class="filters__item">Accessories</span></li>
+    </ul>
+  )}
+
+  <div class="l-grid l-grid--products">
+    {products.map((product) => <ProductCard product={product} />)}
+  </div>
+</section>

@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+
+const contactStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact GreenShop",
+  url: "https://greenshop.example/contact",
+};
+---
+
+<Layout
+  title="Contact Us | GreenShop"
+  description="Get in touch with GreenShop for orders, plant care help and business inquiries."
+  pathname="/contact"
+  structuredData={contactStructuredData}
+>
+  <PageHero
+    title="Contact"
+    text="Need help choosing the right plants? Send us a message and our team will respond within 24 hours."
+  />
+
+  <div class="l-container">
+    <section class="contact" aria-label="Contact form section">
+      <div class="l-stack">
+        <h2 class="section-heading__title">Let&apos;s talk plants</h2>
+        <p class="section-heading__text">
+          We help with product recommendations, care instructions and delivery details.
+        </p>
+        <ul class="l-stack" aria-label="Contact details">
+          <li><strong>Email:</strong> hello@greenshop.example</li>
+          <li><strong>Phone:</strong> +1 (555) 010-7700</li>
+          <li><strong>Address:</strong> 25 Green Avenue, New York, NY</li>
+        </ul>
+      </div>
+
+      <form class="contact-form" action="#" method="post" data-testid="contact-form">
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="name">Full name</label>
+          <input class="contact-form__input" id="name" name="name" type="text" required minlength="2" />
+        </div>
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="email">Email</label>
+          <input class="contact-form__input" id="email" name="email" type="email" required />
+        </div>
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="topic">Topic</label>
+          <select class="contact-form__input" id="topic" name="topic" required>
+            <option value="">Select a topic</option>
+            <option value="order">Order support</option>
+            <option value="care">Plant care</option>
+            <option value="partnership">Partnership</option>
+          </select>
+        </div>
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="message">Message</label>
+          <textarea
+            class="contact-form__textarea"
+            id="message"
+            name="message"
+            rows="5"
+            required
+            minlength="10"
+          ></textarea>
+          <p class="contact-form__error" id="message-hint">Please provide at least 10 characters.</p>
+        </div>
+
+        <button class="c-button" type="submit">Send message</button>
+      </form>
+    </section>
+  </div>
+</Layout>

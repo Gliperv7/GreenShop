@@ -1,0 +1,24 @@
+---
+import { blogPosts } from "../data/blogPosts";
+---
+
+<section class="blog-preview" aria-labelledby="blog-preview-title" data-testid="blog-list">
+  <div class="blog-preview__heading">
+    <h2 id="blog-preview-title" class="section-heading__title">Our Blog Posts</h2>
+    <p class="section-heading__text">We are an online plant shop offering a wide range of cheap and trendy plants.</p>
+  </div>
+
+  <div class="blog-list">
+    {blogPosts.map((post) => (
+      <article class="blog-card">
+        <img src={post.image} alt={post.title} width="268" height="196" loading="lazy" />
+        <div class="blog-card__body">
+          <p class="section-heading__text">{post.date} | Read in 2 minutes</p>
+          <h3>{post.title}</h3>
+          <p>{post.excerpt}</p>
+          <a class="blog-card__link" href="/blog">Read More →</a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import HomeCatalog from "../components/HomeCatalog.astro";
+import PromoCards from "../components/PromoCards.astro";
+import BlogPreview from "../components/BlogPreview.astro";
+import Newsletter from "../components/Newsletter.astro";
+import { products } from "../data/products";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const homepageStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "GreenShop",
+    url: "https://greenshop.example",
+    logo: "https://greenshop.example/assets/logo.svg",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "GreenShop",
+    url: "https://greenshop.example/",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: products.slice(0, 8).map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Product",
+        name: product.name,
+        image: `https://greenshop.example${product.image}`,
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price: product.price,
+        },
+      },
+    })),
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="GreenShop | House Plants & Home Decor"
+  description="Shop indoor plants, stylish pots and care accessories with fast delivery and easy returns."
+  pathname="/"
+  structuredData={homepageStructuredData}
+>
+  <Hero />
+  <div class="l-container l-stack">
+    <HomeCatalog />
+    <PromoCards />
+    <BlogPreview />
+    <Newsletter />
+  </div>
 </Layout>

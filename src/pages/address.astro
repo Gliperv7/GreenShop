@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AccountSidebar from "../components/AccountSidebar.astro";
+---
+
+<Layout title="Address Book | GreenShop" description="Manage billing and shipping addresses." pathname="/address">
+  <div class="l-container account-layout">
+    <AccountSidebar active="Address" />
+
+    <section class="account-content" data-testid="address-page">
+      <div class="account-address__head">
+        <h1>Billing Address</h1>
+        <a href="#">Add</a>
+      </div>
+      <p class="section-heading__text">The following addresses will be used on the checkout page by default.</p>
+
+      <form class="account-form">
+        <div class="account-form__grid">
+          <label>
+            First Name *
+            <input required />
+          </label>
+          <label>
+            Last Name *
+            <input required />
+          </label>
+          <label>
+            Country / Region *
+            <select required>
+              <option value="">Select a country / region</option>
+              <option>United States</option>
+              <option>Ukraine</option>
+            </select>
+          </label>
+          <label>
+            Town / City *
+            <input required />
+          </label>
+          <label>
+            Street Address *
+            <input placeholder="House number and street name" required />
+            <input placeholder="Apartment, suite, unit, etc. (optional)" />
+          </label>
+          <label>
+            State *
+            <select required>
+              <option value="">Select a state</option>
+              <option>New York</option>
+              <option>California</option>
+            </select>
+          </label>
+          <label>
+            Zip *
+            <input required />
+          </label>
+          <label>
+            Phone Number *
+            <div class="account-phone">
+              <select>
+                <option>+966</option>
+                <option>+380</option>
+                <option>+1</option>
+              </select>
+              <input required />
+            </div>
+          </label>
+          <label>
+            Email address *
+            <input type="email" required />
+          </label>
+        </div>
+        <button class="c-button" type="submit">Save Address</button>
+      </form>
+
+      <div class="account-address__head account-address__head--spaced">
+        <h2>Shipping Address</h2>
+        <div class="account-address__actions">
+          <label>
+            <input type="checkbox" />
+            Same as billing address
+          </label>
+          <a href="#">Add</a>
+        </div>
+      </div>
+      <p class="section-heading__text">You have not set up this type of address yet.</p>
+    </section>
+  </div>
+</Layout>

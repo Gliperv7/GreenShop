@@ -1,0 +1,34 @@
+---
+interface Props {
+  mode: "login" | "register";
+}
+
+const { mode } = Astro.props;
+const isLogin = mode === "login";
+---
+
+<section class="auth" data-testid="auth-card">
+  <form class="auth__card">
+    <div class="auth__tabs">
+      <a href="/login" class={isLogin ? "auth__tab auth__tab--active" : "auth__tab"}>Login</a>
+      <span>|</span>
+      <a href="/register" class={!isLogin ? "auth__tab auth__tab--active" : "auth__tab"}>Register</a>
+    </div>
+    <h1>{isLogin ? "Login" : "Register"}</h1>
+
+    <p class="section-heading__text">{isLogin ? "Enter your username and password to login." : "Enter your email and password to register."}</p>
+
+    {!isLogin && <input type="text" placeholder="Username" required />}
+    <input type="email" placeholder={isLogin ? "Enter your email address" : "Enter your email address"} required />
+    <input type="password" placeholder="Password" required minlength="6" />
+    {!isLogin && <input type="password" placeholder="Confirm Password" required minlength="6" />}
+
+    <button class="c-button" type="submit">{isLogin ? "Login" : "Register"}</button>
+
+    <p class="auth__small">Or {isLogin ? "login" : "register"} with</p>
+    <button class="c-button c-button--ghost" type="button">{isLogin ? "Login with Facebook" : "Continue with Facebook"}</button>
+    <button class="c-button c-button--ghost" type="button">{isLogin ? "Login with Google" : "Continue with Google"}</button>
+
+    {isLogin && <a class="auth__forgot" href="/">Forgot Password?</a>}
+  </form>
+</section>

@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { blogPosts } from "../data/blogPosts";
+
+const blogStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: "GreenShop Blog",
+  url: "https://greenshop.example/blog",
+};
+---
+
+<Layout
+  title="Plant Care Blog | GreenShop"
+  description="Guides for plant care, repotting and indoor styling from GreenShop experts."
+  pathname="/blog"
+  type="article"
+  structuredData={blogStructuredData}
+>
+  <PageHero title="Our Blog" text="Useful plant care content for beginners and enthusiasts." />
+  <div class="l-container">
+    <section class="blog-list" aria-label="Blog posts" data-testid="blog-list">
+      {blogPosts.map((post) => (
+        <article class="blog-card">
+          <img src={post.image} alt={post.title} width="420" height="240" loading="lazy" />
+          <div class="blog-card__body">
+            <p class="section-heading__text">{post.date}</p>
+            <h2 class="section-heading__title">{post.title}</h2>
+            <p>{post.excerpt}</p>
+            <a class="c-button c-button--ghost" href="/contact">Read more</a>
+          </div>
+        </article>
+      ))}
+    </section>
+  </div>
+</Layout>

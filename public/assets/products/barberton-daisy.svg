@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="barberton-daisy">
+  <rect width="320" height="320" rx="28" fill="#F8FBF8"/>
+  <ellipse cx="160" cy="272" rx="90" ry="18" fill="#E1EFE2"/>
+  <rect x="112" y="176" width="96" height="84" rx="16" fill="#46A358"/>
+  <path d="M160 80c-34 8-60 42-48 104 26-5 45-17 57-36 12-19 13-42 9-68h-18Z" fill="#7AD68C"/>
+  <path d="M196 110c-24 6-42 28-34 68 18-3 31-11 39-23 8-12 8-26 5-45h-10Z" fill="#7AD68C"/>
+  <path d="M126 120c21 4 35 24 28 62-15-2-25-9-32-20-6-11-6-23-4-41h8Z" fill="#7AD68C"/>
+</svg>

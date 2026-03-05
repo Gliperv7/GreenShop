@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CartTable from "../components/CartTable.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import { products } from "../data/products";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Shopping Cart",
+  url: "https://greenshop.example/plant-care",
+};
+---
+
+<Layout
+  title="Plant Care | GreenShop"
+  description="Shopping cart view layout adapted from Figma reference."
+  pathname="/plant-care"
+  structuredData={structuredData}
+>
+  <div class="l-container l-stack">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: "Shopping Cart" }]} />
+    <CartTable />
+    <ProductGrid products={products.slice(0, 5)} heading="You may be interested in" description="" />
+  </div>
+</Layout>

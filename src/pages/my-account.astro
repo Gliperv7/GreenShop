@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AccountSidebar from "../components/AccountSidebar.astro";
+---
+
+<Layout title="My Account | GreenShop" description="Manage your account settings and profile details." pathname="/my-account">
+  <div class="l-container account-layout">
+    <AccountSidebar active="Account Details" />
+
+    <section class="account-content" data-testid="account-page">
+      <h1>Personal Information</h1>
+      <form class="account-form">
+        <div class="account-form__grid">
+          <label>
+            First Name *
+            <input value="Jenny" required />
+          </label>
+          <label>
+            Last Name *
+            <input value="Wilson" required />
+          </label>
+          <label>
+            Email address *
+            <input type="email" value="jenny@email.com" required />
+          </label>
+          <label>
+            Phone Number *
+            <div class="account-phone">
+              <select>
+                <option>+966</option>
+                <option>+380</option>
+                <option>+1</option>
+              </select>
+              <input value="123451234" required />
+            </div>
+          </label>
+          <label>
+            Username *
+            <input value="jennywilson" required />
+          </label>
+          <div class="account-photo">
+            <span>Photo</span>
+            <div class="account-photo__row">
+              <button class="account-photo__avatar" type="button" aria-label="Change profile photo">☺</button>
+              <button class="c-button" type="button">Change</button>
+              <button class="account-photo__remove" type="button">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <h2>Password change</h2>
+        <div class="account-form__passwords">
+          <label>
+            Current password
+            <input type="password" value="password" />
+          </label>
+          <label>
+            New password
+            <input type="password" value="password" />
+          </label>
+          <label>
+            Confirm new password
+            <input type="password" value="password" />
+          </label>
+        </div>
+
+        <button class="c-button" type="submit">Save Change</button>
+      </form>
+    </section>
+  </div>
+</Layout>

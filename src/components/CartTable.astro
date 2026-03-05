@@ -1,0 +1,113 @@
+<section class="cart" data-testid="cart-page" data-cart-page>
+  <div class="cart__table-wrap">
+    <table class="cart__table">
+      <thead>
+        <tr>
+          <th>Products</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody data-cart-body>
+        <tr>
+          <td colspan="4">Loading cart...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="cart__totals">
+    <h2>Cart Totals</h2>
+    <div class="cart__line"><span>Subtotal</span><strong data-cart-subtotal>$0.00</strong></div>
+    <div class="cart__line"><span>Coupon Discount</span><strong>(-) $00.00</strong></div>
+    <div class="cart__line"><span>Shipping</span><strong data-cart-shipping>$0.00</strong></div>
+    <div class="cart__line cart__line--total"><span>Total</span><strong data-cart-total>$0.00</strong></div>
+    <a class="c-button" href="/checkout">Proceed To Checkout</a>
+  </aside>
+</section>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const root = document.querySelector("[data-cart-page]");
+      if (!root || !window.GreenShopCart) return false;
+
+      const body = root.querySelector("[data-cart-body]");
+      const subtotalEl = root.querySelector("[data-cart-subtotal]");
+      const shippingEl = root.querySelector("[data-cart-shipping]");
+      const totalEl = root.querySelector("[data-cart-total]");
+
+      const money = (value) => `$${Number(value || 0).toFixed(2)}`;
+
+      const render = () => {
+        const items = window.GreenShopCart.getDetailedItems();
+        const totals = window.GreenShopCart.getTotals();
+
+        if (subtotalEl) subtotalEl.textContent = money(totals.subtotal);
+        if (shippingEl) shippingEl.textContent = money(totals.shipping);
+        if (totalEl) totalEl.textContent = money(totals.total);
+
+        if (!body) return;
+
+        if (!items.length) {
+          body.innerHTML = `<tr><td colspan="4">Your cart is empty.</td></tr>`;
+          return;
+        }
+
+        body.innerHTML = items
+          .map(
+            (item) => `
+            <tr>
+              <td>
+                <div class="cart__product">
+                  <img src="${item.image}" alt="${item.name}" width="70" height="70" />
+                  <div>
+                    <strong><a href="/shop/${item.id}">${item.name}</a></strong>
+                    <p class="section-heading__text">SKU: ${item.sku}</p>
+                  </div>
+                </div>
+              </td>
+              <td>${money(item.price)}</td>
+              <td>
+                <div class="cart__qty">
+                  <button class="qty-btn" type="button" aria-label="Decrease" data-qty-change data-id="${item.id}" data-delta="-1">-</button>
+                  <span>${item.qty}</span>
+                  <button class="qty-btn" type="button" aria-label="Increase" data-qty-change data-id="${item.id}" data-delta="1">+</button>
+                  <button class="qty-btn qty-btn--remove" type="button" aria-label="Remove" data-remove-item data-id="${item.id}">×</button>
+                </div>
+              </td>
+              <td>${money(item.total)}</td>
+            </tr>
+          `
+          )
+          .join("");
+      };
+
+      root.addEventListener("click", (event) => {
+        const qtyBtn = event.target.closest("[data-qty-change]");
+        if (qtyBtn) {
+          const id = qtyBtn.getAttribute("data-id");
+          const delta = Number(qtyBtn.getAttribute("data-delta") || 0);
+          const current = window.GreenShopCart.load().find((item) => item.id === id);
+          if (id && current) window.GreenShopCart.updateQty(id, current.qty + delta);
+          return;
+        }
+
+        const removeBtn = event.target.closest("[data-remove-item]");
+        if (removeBtn) {
+          const id = removeBtn.getAttribute("data-id");
+          if (id) window.GreenShopCart.remove(id);
+        }
+      });
+
+      window.addEventListener("greenshop:cart-change", render);
+      render();
+      return true;
+    };
+
+    if (!init()) {
+      window.addEventListener("DOMContentLoaded", init, { once: true });
+    }
+  })();
+</script>

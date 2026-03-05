@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import ShopCatalog from "../components/ShopCatalog.astro";
+
+const shopStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "GreenShop Catalog",
+  url: "https://greenshop.example/shop",
+};
+---
+
+<Layout
+  title="Shop Plants | GreenShop"
+  description="Browse all plants, seeds and accessories in the GreenShop catalog."
+  pathname="/shop"
+  structuredData={shopStructuredData}
+>
+  <PageHero title="Shop" text="Choose from houseplants, seeds and decor accessories." />
+  <div class="l-container l-stack">
+    <ShopCatalog />
+  </div>
+</Layout>

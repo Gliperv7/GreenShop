@@ -1,0 +1,163 @@
+---
+import ProductCard from "./ProductCard.astro";
+import { products } from "../data/products";
+
+const categories = [
+  ["All", products.length],
+  ["Plants", products.filter((item) => item.category === "Plants").length],
+  ["Seeds", products.filter((item) => item.category === "Seeds").length],
+  ["Accessories", products.filter((item) => item.category === "Accessories").length],
+] as const;
+---
+
+<section class="home-catalog" aria-label="Shop catalog">
+  <aside class="catalog-sidebar" data-testid="catalog-sidebar">
+    <h2 class="catalog-sidebar__title">Categories</h2>
+    <ul class="catalog-sidebar__list">
+      {categories.map(([name, count], index) => (
+        <li class="catalog-sidebar__item">
+          <button
+            class={index === 0 ? "catalog-sidebar__link catalog-sidebar__link--active" : "catalog-sidebar__link"}
+            type="button"
+            data-filter-category={name}
+          >
+            {name}
+          </button>
+          <span class="catalog-sidebar__count">({count})</span>
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="catalog-sidebar__subtitle">Search</h3>
+    <input class="catalog-sidebar__search" id="shop-search" type="search" placeholder="Search product..." />
+
+    <h3 class="catalog-sidebar__subtitle">Price Range</h3>
+    <label class="catalog-sidebar__price-range">
+      <span>Max price: <strong id="shop-price-value">$229</strong></span>
+      <input id="shop-price" type="range" min="39" max="229" value="229" />
+    </label>
+
+    <h3 class="catalog-sidebar__subtitle">Size</h3>
+    <div class="catalog-sidebar__sizes">
+      <label><input type="checkbox" value="S" data-filter-size checked /> Small</label>
+      <label><input type="checkbox" value="M" data-filter-size checked /> Medium</label>
+      <label><input type="checkbox" value="L" data-filter-size checked /> Large</label>
+    </div>
+  </aside>
+
+  <div class="catalog-main" data-testid="products-section">
+    <div class="catalog-main__top">
+      <ul class="filters" aria-label="Product categories">
+        <li><button class="filters__item filters__item--active" type="button" data-filter-badge="">All Plants</button></li>
+        <li><button class="filters__item" type="button" data-filter-badge="New">New Arrivals</button></li>
+        <li><button class="filters__item" type="button" data-filter-badge="Sale">Sale</button></li>
+      </ul>
+      <label class="shop-sort">
+        Short by:
+        <select id="shop-sort">
+          <option value="default">Default sorting</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name-asc">Name A-Z</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="section-heading__text" id="shop-results" data-testid="product-results-count">{products.length} products found</p>
+
+    <div class="l-grid l-grid--products" id="shop-grid">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const cards = Array.from(document.querySelectorAll("[data-product-card]"));
+    if (!cards.length) return;
+
+    const searchInput = document.getElementById("shop-search");
+    const priceInput = document.getElementById("shop-price");
+    const priceValue = document.getElementById("shop-price-value");
+    const sortSelect = document.getElementById("shop-sort");
+    const resultText = document.getElementById("shop-results");
+    const badgeButtons = Array.from(document.querySelectorAll("[data-filter-badge]"));
+    const categoryButtons = Array.from(document.querySelectorAll("[data-filter-category]"));
+    const sizeChecks = Array.from(document.querySelectorAll("[data-filter-size]"));
+
+    let activeBadge = "";
+    let activeCategory = "All";
+
+    const apply = () => {
+      const query = (searchInput?.value || "").trim().toLowerCase();
+      const maxPrice = Number(priceInput?.value || 99999);
+      const checkedSizes = sizeChecks.filter((item) => item.checked).map((item) => item.value);
+
+      const visibleCards = [];
+
+      cards.forEach((card) => {
+        const name = (card.getAttribute("data-name") || "").toLowerCase();
+        const badge = card.getAttribute("data-badge") || "";
+        const category = card.getAttribute("data-category") || "";
+        const size = card.getAttribute("data-size") || "";
+        const price = Number(card.getAttribute("data-price") || 0);
+
+        const passQuery = !query || name.includes(query);
+        const passBadge = !activeBadge || badge === activeBadge;
+        const passCategory = activeCategory === "All" || category === activeCategory;
+        const passSize = checkedSizes.includes(size);
+        const passPrice = price <= maxPrice;
+
+        const visible = passQuery && passBadge && passCategory && passSize && passPrice;
+        card.style.display = visible ? "block" : "none";
+        if (visible) visibleCards.push(card);
+      });
+
+      if (sortSelect && sortSelect.value !== "default") {
+        const parent = document.getElementById("shop-grid");
+        if (parent) {
+          const sorted = [...visibleCards].sort((a, b) => {
+            const nameA = a.getAttribute("data-name") || "";
+            const nameB = b.getAttribute("data-name") || "";
+            const priceA = Number(a.getAttribute("data-price") || 0);
+            const priceB = Number(b.getAttribute("data-price") || 0);
+
+            if (sortSelect.value === "price-asc") return priceA - priceB;
+            if (sortSelect.value === "price-desc") return priceB - priceA;
+            if (sortSelect.value === "name-asc") return nameA.localeCompare(nameB);
+            return 0;
+          });
+          sorted.forEach((card) => parent.appendChild(card));
+        }
+      }
+
+      if (resultText) resultText.textContent = `${visibleCards.length} products found`;
+      if (priceValue) priceValue.textContent = `$${maxPrice}`;
+    };
+
+    badgeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeBadge = button.getAttribute("data-filter-badge") || "";
+        badgeButtons.forEach((item) => item.classList.remove("filters__item--active"));
+        button.classList.add("filters__item--active");
+        apply();
+      });
+    });
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeCategory = button.getAttribute("data-filter-category") || "All";
+        categoryButtons.forEach((item) => item.classList.remove("catalog-sidebar__link--active"));
+        button.classList.add("catalog-sidebar__link--active");
+        apply();
+      });
+    });
+
+    searchInput?.addEventListener("input", apply);
+    priceInput?.addEventListener("input", apply);
+    sortSelect?.addEventListener("change", apply);
+    sizeChecks.forEach((item) => item.addEventListener("change", apply));
+
+    apply();
+  })();
+</script>

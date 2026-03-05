@@ -1,0 +1,32 @@
+<section class="newsletter" aria-labelledby="newsletter-title" data-testid="newsletter-section">
+  <h2 id="newsletter-title" class="section-heading__title">Join Our Newsletter</h2>
+  <p class="section-heading__text">
+    Get weekly care tips, new product drops and seasonal discounts.
+  </p>
+  <form class="newsletter__form" action="#" method="post">
+    <label class="sr-only" for="newsletter-email">Email address</label>
+    <input
+      class="newsletter__input"
+      type="email"
+      id="newsletter-email"
+      name="email"
+      placeholder="Enter your email address"
+      required
+    />
+    <button class="c-button" type="submit">Join</button>
+  </form>
+</section>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GreenShop logo">
+  <rect width="64" height="64" rx="16" fill="#46A358"/>
+  <path d="M45 20c-9 0-18 8-18 20 6 0 12-2 16-6 4-4 6-9 6-14h-4Z" fill="#fff"/>
+  <path d="M15 30c0 10 8 18 20 18 0-6-2-12-6-16-4-4-9-6-14-6v4Z" fill="#E8FFE9"/>
+</svg>

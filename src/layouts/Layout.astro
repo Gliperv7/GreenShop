@@ -1,23 +1,250 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import LoginModal from "../components/LoginModal.astro";
+import { products } from "../data/products";
+import { cartItems as defaultCartItems } from "../data/cart";
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/layout.css";
+import "../styles/components.css";
+
+interface Props {
+  title: string;
+  description: string;
+  pathname?: string;
+  image?: string;
+  type?: "website" | "article";
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+  hideFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  pathname = "/",
+  image = "/assets/og-image.svg",
+  type = "website",
+  structuredData,
+  hideFooter = false,
+} = Astro.props;
+
+const siteName = "GreenShop";
+const siteUrl = "https://greenshop.example";
+const canonical = new URL(pathname, siteUrl).toString();
+const ogImage = new URL(image, siteUrl).toString();
+const clientProducts = products.map((product) => ({
+  id: product.id,
+  name: product.name,
+  price: product.price,
+  image: product.image,
+  sku: product.sku,
+  size: product.size,
+  category: product.category,
+}));
+const defaultCart = defaultCartItems.map((item) => ({ id: item.id, qty: item.qty }));
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <Header currentPath={pathname} />
+    <main>
+      <slot />
+    </main>
+    {!hideFooter && <Footer />}
+    <LoginModal />
+
+    {
+      structuredData && (
+        <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+      )
+    }
+    <script
+      is:inline
+      set:html={`
+        (() => {
+          const PRODUCTS = ${JSON.stringify(clientProducts)};
+          const DEFAULT_CART = ${JSON.stringify(defaultCart)};
+          const PRODUCT_MAP = new Map(PRODUCTS.map((item) => [item.id, item]));
+          const KEY = "greenshop-cart-v1";
+
+          const parse = (value) => {
+            try {
+              const parsed = JSON.parse(value || "[]");
+              return Array.isArray(parsed) ? parsed : [];
+            } catch {
+              return [];
+            }
+          };
+
+          const loadRaw = () => {
+            if (!localStorage.getItem(KEY)) {
+              localStorage.setItem(KEY, JSON.stringify(DEFAULT_CART));
+            }
+            return parse(localStorage.getItem(KEY));
+          };
+          const saveRaw = (items) => localStorage.setItem(KEY, JSON.stringify(items));
+
+          const normalize = (items) =>
+            items
+              .filter((item) => PRODUCT_MAP.has(item.id))
+              .map((item) => ({ id: item.id, qty: Math.max(1, Number(item.qty) || 1) }));
+
+          const load = () => normalize(loadRaw());
+          const save = (items) => {
+            const normalized = normalize(items);
+            saveRaw(normalized);
+            window.dispatchEvent(new CustomEvent("greenshop:cart-change", { detail: normalized }));
+            return normalized;
+          };
+
+          const add = (id, qty = 1) => {
+            const current = load();
+            const existing = current.find((item) => item.id === id);
+            if (existing) existing.qty += Math.max(1, qty);
+            else current.push({ id, qty: Math.max(1, qty) });
+            return save(current);
+          };
+
+          const updateQty = (id, qty) => {
+            const current = load();
+            const nextQty = Math.max(0, Number(qty) || 0);
+            const next = current
+              .map((item) => (item.id === id ? { ...item, qty: nextQty } : item))
+              .filter((item) => item.qty > 0);
+            return save(next);
+          };
+
+          const remove = (id) => save(load().filter((item) => item.id !== id));
+          const clear = () => save([]);
+
+          const getDetailedItems = () =>
+            load().map((entry) => {
+              const product = PRODUCT_MAP.get(entry.id);
+              return {
+                ...product,
+                qty: entry.qty,
+                total: product.price * entry.qty,
+              };
+            });
+
+          const getTotals = () => {
+            const subtotal = getDetailedItems().reduce((sum, item) => sum + item.total, 0);
+            const shipping = subtotal > 0 ? 16 : 0;
+            return { subtotal, shipping, total: subtotal + shipping };
+          };
+
+          const getItemsCount = () => load().reduce((sum, item) => sum + item.qty, 0);
+
+          window.GreenShopCart = {
+            load,
+            save,
+            add,
+            updateQty,
+            remove,
+            clear,
+            getDetailedItems,
+            getTotals,
+            getItemsCount,
+            products: PRODUCTS,
+          };
+          window.dispatchEvent(new CustomEvent("greenshop:cart-change", { detail: load() }));
+
+          document.addEventListener("click", (event) => {
+            const target = event.target.closest("[data-add-product]");
+            if (!target) return;
+            const id = target.getAttribute("data-add-product");
+            const qty = Number(target.getAttribute("data-add-qty") || 1);
+            if (!id) return;
+            window.GreenShopCart.add(id, qty);
+            const labelBefore = target.textContent;
+            target.textContent = "Added";
+            setTimeout(() => {
+              target.textContent = labelBefore || "Add to cart";
+            }, 1000);
+          });
+
+          const authModal = document.querySelector("[data-auth-modal]");
+          const authTabs = Array.from(document.querySelectorAll("[data-auth-tab]"));
+          const authForms = Array.from(document.querySelectorAll("[data-auth-form]"));
+
+          const switchAuthTab = (mode) => {
+            authTabs.forEach((tab) => tab.classList.toggle("auth-modal__tab--active", tab.getAttribute("data-auth-tab") === mode));
+            authForms.forEach((form) => form.classList.toggle("auth-modal__form--active", form.getAttribute("data-auth-form") === mode));
+          };
+
+          const openAuth = (mode = "login") => {
+            if (!authModal) return;
+            switchAuthTab(mode);
+            authModal.hidden = false;
+            document.body.style.overflow = "hidden";
+          };
+
+          const closeAuth = () => {
+            if (!authModal) return;
+            authModal.hidden = true;
+            document.body.style.overflow = "";
+          };
+
+          document.addEventListener("click", (event) => {
+            const openBtn = event.target.closest("[data-open-login-modal]");
+            if (openBtn) {
+              event.preventDefault();
+              const mode = openBtn.getAttribute("data-open-login-modal") || "login";
+              openAuth(mode);
+              return;
+            }
+            if (event.target.closest("[data-auth-close]")) {
+              closeAuth();
+            }
+          });
+
+          authTabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+              switchAuthTab(tab.getAttribute("data-auth-tab") || "login");
+            });
+          });
+
+          authForms.forEach((form) => {
+            form.addEventListener("submit", (event) => {
+              event.preventDefault();
+              if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+              }
+              closeAuth();
+            });
+          });
+
+          const authParam = new URL(window.location.href).searchParams.get("auth");
+          if (window.location.pathname === "/login") openAuth("login");
+          else if (window.location.pathname === "/register") openAuth("register");
+          else if (authParam === "login" || authParam === "register") openAuth(authParam);
+        })();
+      `}
+    ></script>
+  </body>
+</html>

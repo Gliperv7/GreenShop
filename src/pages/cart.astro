@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CartTable from "../components/CartTable.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import { products } from "../data/products";
+---
+
+<Layout title="Cart | GreenShop" description="Review products in your cart and proceed to checkout." pathname="/cart">
+  <div class="l-container l-stack">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop", href: "/shop" }, { label: "Cart" }]} />
+    <CartTable />
+    <ProductGrid products={products.slice(0, 5)} heading="You may be interested in" description="" />
+  </div>
+</Layout>

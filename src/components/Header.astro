@@ -1,0 +1,106 @@
+---
+import { navItems } from "../data/navigation";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<header class="site-header" data-testid="site-header">
+  <div class="l-container site-header__inner">
+    <a class="site-brand" href="/" aria-label="GreenShop home">
+      <img src="/assets/logo.svg" width="34" height="34" alt="GreenShop logo" />
+      <span>GREENSHOP</span>
+    </a>
+
+    <button
+      class="site-header__burger"
+      type="button"
+      aria-label="Toggle menu"
+      aria-controls="site-main-nav"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav" id="site-main-nav" aria-label="Main navigation" data-menu>
+      <ul class="site-nav__list">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="site-nav__link"
+              aria-current={currentPath === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="site-header__icon-btn" href="/shop" aria-label="Search">⌕</a>
+      <a class="site-header__icon-btn" href="/cart" aria-label="Open cart">
+        <img src="/assets/figma/icons/shopping-1-4-201.svg" alt="Cart" width="20" height="20" />
+        <span class="site-header__cart-count" data-cart-count>0</span>
+      </a>
+      <button class="c-button" type="button" data-open-login-modal="login">Login</button>
+    </div>
+  </div>
+  <button class="site-nav__backdrop" type="button" aria-label="Close menu" data-menu-backdrop></button>
+</header>
+
+<script is:inline>
+  (() => {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    const toggle = header.querySelector("[data-menu-toggle]");
+    const menu = header.querySelector("[data-menu]");
+    const backdrop = header.querySelector("[data-menu-backdrop]");
+    const menuLinks = header.querySelectorAll(".site-nav__link");
+
+    if (!toggle || !menu || !backdrop) return;
+
+    const closeMenu = () => {
+      header.classList.remove("site-header--menu-open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    };
+
+    const openMenu = () => {
+      header.classList.add("site-header--menu-open");
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    };
+
+    toggle.addEventListener("click", () => {
+      if (header.classList.contains("site-header--menu-open")) closeMenu();
+      else openMenu();
+    });
+
+    backdrop.addEventListener("click", closeMenu);
+    menuLinks.forEach((link) => link.addEventListener("click", closeMenu));
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 856) closeMenu();
+    });
+
+    const cartCount = header.querySelector("[data-cart-count]");
+    const renderCartCount = () => {
+      const count = window.GreenShopCart?.getItemsCount?.() ?? 0;
+      if (!cartCount) return;
+      cartCount.textContent = String(count);
+      cartCount.hidden = count === 0;
+    };
+
+    renderCartCount();
+    window.addEventListener("greenshop:cart-change", renderCartCount);
+  })();
+</script>
