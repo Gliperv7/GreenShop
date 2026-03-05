@@ -59,10 +59,10 @@ test.describe("GreenShop pages", () => {
     await page.goto("/");
 
     const cartCount = page.locator("[data-cart-count]");
-    await expect(cartCount).toHaveText("17");
+    await expect(cartCount).toBeHidden();
 
     await page.locator("[data-add-product]").first().click();
-    await expect(cartCount).toHaveText("18");
+    await expect(cartCount).toHaveText("1");
 
     await page.goto("/checkout");
 
