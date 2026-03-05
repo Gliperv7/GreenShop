@@ -12,7 +12,7 @@
     "test:e2e:update": "playwright test --update-snapshots"
   },
   "dependencies": {
-    "@astrojs/node": "^9.5.4",
+    "@astrojs/vercel": "^9.0.4",
     "astro": "^5.17.1",
     "bcryptjs": "^3.0.3"
   },
