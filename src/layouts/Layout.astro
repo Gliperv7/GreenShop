@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import LoginModal from "../components/LoginModal.astro";
 import { products } from "../data/products";
 import { cartItems as defaultCartItems } from "../data/cart";
+import { getSessionUser } from "../lib/auth";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/layout.css";
@@ -28,6 +29,7 @@ const {
   structuredData,
   hideFooter = false,
 } = Astro.props;
+const sessionUser = getSessionUser(Astro.cookies);
 
 const siteName = "GreenShop";
 const siteUrl = "https://greenshop.example";
@@ -70,7 +72,7 @@ const defaultCart = defaultCartItems.map((item) => ({ id: item.id, qty: item.qty
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
-    <Header currentPath={pathname} />
+    <Header currentPath={pathname} user={sessionUser} />
     <main>
       <slot />
     </main>
@@ -171,6 +173,21 @@ const defaultCart = defaultCartItems.map((item) => ({ id: item.id, qty: item.qty
             getItemsCount,
             products: PRODUCTS,
           };
+          window.GreenShopDB = {
+            enabled: true,
+            async createOrder(order) {
+              const response = await fetch("/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(order),
+              });
+              if (!response.ok) {
+                const text = await response.text();
+                throw new Error(text || "Failed to save order");
+              }
+              return response.json();
+            },
+          };
           window.dispatchEvent(new CustomEvent("greenshop:cart-change", { detail: load() }));
 
           document.addEventListener("click", (event) => {
@@ -228,14 +245,62 @@ const defaultCart = defaultCartItems.map((item) => ({ id: item.id, qty: item.qty
             });
           });
 
+          const authMessages = Array.from(document.querySelectorAll("[data-auth-message]"));
+          const showAuthMessage = (text, type = "error") => {
+            authMessages.forEach((item) => {
+              item.textContent = text;
+              item.dataset.type = type;
+            });
+          };
+          const clearAuthMessage = () => showAuthMessage("", "neutral");
+
           authForms.forEach((form) => {
-            form.addEventListener("submit", (event) => {
+            form.addEventListener("submit", async (event) => {
               event.preventDefault();
               if (!form.checkValidity()) {
                 form.reportValidity();
                 return;
               }
-              closeAuth();
+              clearAuthMessage();
+
+              const mode = form.getAttribute("data-auth-form");
+              const formData = new FormData(form);
+              const email = String(formData.get("email") || "").trim();
+              const password = String(formData.get("password") || "");
+              const username = String(formData.get("username") || "").trim();
+              const confirmPassword = String(formData.get("confirmPassword") || "");
+
+              if (mode === "register" && password !== confirmPassword) {
+                showAuthMessage("Passwords do not match");
+                return;
+              }
+
+              const endpoint = mode === "register" ? "/api/auth/register" : "/api/auth/login";
+              const payload =
+                mode === "register"
+                  ? { name: username, email, password }
+                  : { email, password };
+
+              try {
+                const response = await fetch(endpoint, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                  throw new Error(data.error || "Authorization failed");
+                }
+                if (mode === "register") {
+                  sessionStorage.setItem("greenshop-auth-flash", "Registration successful");
+                } else {
+                  sessionStorage.setItem("greenshop-auth-flash", "Logged in successfully");
+                }
+                closeAuth();
+                window.location.href = "/";
+              } catch (error) {
+                showAuthMessage(error instanceof Error ? error.message : "Authorization failed");
+              }
             });
           });
 

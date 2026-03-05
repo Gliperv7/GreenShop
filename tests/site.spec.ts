@@ -21,7 +21,7 @@ test.describe("GreenShop pages", () => {
     await expect(page).toHaveURL(/\/blog$/);
 
     await page.getByRole("link", { name: "My Account", exact: true }).first().click();
-    await expect(page).toHaveURL(/\/my-account$/);
+    await expect(page).toHaveURL(/auth=login/);
   });
 
   test("burger menu works on mobile", async ({ browser }) => {
@@ -82,6 +82,7 @@ test.describe("GreenShop pages", () => {
 
     const orderData = await page.evaluate(() => localStorage.getItem("greenshop-last-order"));
     expect(orderData).not.toBeNull();
+
   });
 
   test("renders product cards and expected count", async ({ page }) => {
@@ -129,8 +130,6 @@ test.describe("GreenShop pages", () => {
       "/order-confirmation",
       "/login",
       "/register",
-      "/my-account",
-      "/address",
       "/contact",
       "/plant-care",
     ];
@@ -139,6 +138,27 @@ test.describe("GreenShop pages", () => {
       await page.goto(route);
       await expect(page.locator("main h1, main h2").first()).toBeVisible();
     }
+  });
+
+  test("protected pages require auth", async ({ page }) => {
+    await page.goto("/my-account");
+    await expect(page).toHaveURL(/auth=login/);
+
+    await page.goto("/admin-orders");
+    await expect(page).toHaveURL(/auth=login/);
+  });
+
+  test("register modal validates password mismatch", async ({ page }) => {
+    const registerForm = page.locator('[data-auth-form="register"]');
+
+    await page.goto("/?auth=register");
+    await registerForm.locator('input[name="username"]').fill("Test User");
+    await registerForm.locator('input[name="email"]').fill(`user${Date.now()}@example.com`);
+    await registerForm.locator('input[name="password"]').fill("password123");
+    await registerForm.locator('input[name="confirmPassword"]').fill("password321");
+    await registerForm.locator('button[type="submit"]').click();
+
+    await expect(registerForm.locator("[data-auth-message]")).toContainText("Passwords do not match");
   });
 
   test("contact form html validation triggers", async ({ page }) => {

@@ -1,11 +1,13 @@
 ---
 import { navItems } from "../data/navigation";
+import type { SessionUser } from "../lib/auth";
 
 interface Props {
   currentPath: string;
+  user?: SessionUser | null;
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, user = null } = Astro.props;
 ---
 
 <header class="site-header" data-testid="site-header">
@@ -50,7 +52,22 @@ const { currentPath } = Astro.props;
         <img src="/assets/figma/icons/shopping-1-4-201.svg" alt="Cart" width="20" height="20" />
         <span class="site-header__cart-count" data-cart-count>0</span>
       </a>
-      <button class="c-button" type="button" data-open-login-modal="login">Login</button>
+      {
+        user ? (
+          <div class="site-header__auth">
+            {user.role === "admin" && (
+              <a class="site-header__role-link" href="/admin-orders" aria-label="Admin orders">Admin</a>
+            )}
+            <a class="site-header__user-link" href="/my-account" aria-label="My account">
+              <span class="site-header__user-name">Hi, {user.name}</span>
+            </a>
+            <button class="c-button c-button--ghost site-header__logout-btn" type="button" data-logout-btn>Logout</button>
+          </div>
+        ) : (
+          <button class="c-button" type="button" data-open-login-modal="login">Login</button>
+        )
+      }
+      <span class="site-header__auth-note" data-auth-note hidden></span>
     </div>
   </div>
   <button class="site-nav__backdrop" type="button" aria-label="Close menu" data-menu-backdrop></button>
@@ -102,5 +119,25 @@ const { currentPath } = Astro.props;
 
     renderCartCount();
     window.addEventListener("greenshop:cart-change", renderCartCount);
+
+    const logoutBtn = header.querySelector("[data-logout-btn]");
+    logoutBtn?.addEventListener("click", async () => {
+      try {
+        await fetch("/api/auth/logout", { method: "POST" });
+      } finally {
+        window.location.href = "/";
+      }
+    });
+
+    const authNote = header.querySelector("[data-auth-note]");
+    const flash = sessionStorage.getItem("greenshop-auth-flash");
+    if (authNote && flash) {
+      authNote.textContent = flash;
+      authNote.hidden = false;
+      sessionStorage.removeItem("greenshop-auth-flash");
+      setTimeout(() => {
+        authNote.hidden = true;
+      }, 2600);
+    }
   })();
 </script>

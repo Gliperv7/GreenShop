@@ -1,0 +1,122 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AccountSidebar from "../components/AccountSidebar.astro";
+import { getSessionUser } from "../lib/auth";
+
+const user = getSessionUser(Astro.cookies);
+if (!user) {
+  return Astro.redirect("/?auth=login");
+}
+---
+
+<Layout title="My Orders | GreenShop" description="View your GreenShop order history." pathname="/orders">
+  <div class="l-container account-layout">
+    <AccountSidebar active="Orders" />
+
+    <section class="account-content account-orders" data-orders-page>
+      <h1>My Orders</h1>
+      <p class="section-heading__text">Recent orders for your account email.</p>
+
+      <form class="orders-filter" data-orders-filter>
+        <label>
+          Email
+          <input name="email" type="email" placeholder="jenny@email.com" value={user.email} required />
+        </label>
+        <button class="c-button" type="submit">Load Orders</button>
+      </form>
+
+      <div class="orders-list" data-orders-list>
+        <p>Loading orders...</p>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const root = document.querySelector("[data-orders-page]");
+      if (!root) return false;
+
+      const form = root.querySelector("[data-orders-filter]");
+      const list = root.querySelector("[data-orders-list]");
+      if (!form || !list) return true;
+
+      const money = (value) => `$${Number(value || 0).toFixed(2)}`;
+      const date = (value) =>
+        new Date(value).toLocaleString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+      const render = (orders) => {
+        if (!orders.length) {
+          list.innerHTML = `<p>No orders found for this email.</p>`;
+          return;
+        }
+
+        list.innerHTML = orders
+          .map(
+            (order) => `
+            <article class="order-card" data-order-id="${order.id}">
+              <header class="order-card__head">
+                <div>
+                  <h2>Order #${order.id.slice(0, 8)}</h2>
+                  <p>${date(order.created_at)}</p>
+                </div>
+                <div class="order-card__meta">
+                  <span class="order-status">${order.status || "new"}</span>
+                  <strong>${money(order.total)}</strong>
+                </div>
+              </header>
+              <ul class="order-card__items">
+                ${(order.order_items || [])
+                  .map(
+                    (item) => `
+                    <li>
+                      <span>${item.product_name} x${item.qty}</span>
+                      <strong>${money(item.line_total)}</strong>
+                    </li>
+                  `
+                  )
+                  .join("")}
+              </ul>
+            </article>
+          `
+          )
+          .join("");
+      };
+
+      const loadOrders = async (email) => {
+        list.innerHTML = `<p>Loading orders...</p>`;
+        try {
+          const response = await fetch(`/api/orders?email=${encodeURIComponent(email)}&limit=20`);
+          if (!response.ok) throw new Error("Failed to load orders");
+          const data = await response.json();
+          render(Array.isArray(data.orders) ? data.orders : []);
+        } catch (error) {
+          console.error(error);
+          list.innerHTML = `<p>Unable to load orders. Try again.</p>`;
+        }
+      };
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = new FormData(form).get("email");
+        if (!email) return;
+        loadOrders(String(email));
+      });
+
+      const email = new FormData(form).get("email");
+      if (email) loadOrders(String(email));
+      return true;
+    };
+
+    if (!init()) {
+      window.addEventListener("DOMContentLoaded", init, { once: true });
+    }
+  })();
+</script>

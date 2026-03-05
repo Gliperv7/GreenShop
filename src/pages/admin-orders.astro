@@ -1,0 +1,170 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSessionUser } from "../lib/auth";
+
+const user = getSessionUser(Astro.cookies);
+if (!user || user.role !== "admin") {
+  return Astro.redirect("/?auth=login");
+}
+---
+
+<Layout title="Admin Orders | GreenShop" description="Manage order statuses." pathname="/admin-orders">
+  <section class="l-container admin-orders" data-admin-orders>
+    <header class="admin-orders__head">
+      <h1>Orders Admin</h1>
+      <p class="section-heading__text">Load recent orders and update status.</p>
+    </header>
+
+    <form class="admin-orders__controls" data-admin-controls>
+      <label>
+        Limit
+        <input name="limit" type="number" value="30" min="1" max="100" />
+      </label>
+      <button class="c-button" type="submit">Load Orders</button>
+    </form>
+
+    <div class="admin-orders__list" data-admin-list>
+      <p>Loading orders...</p>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  (() => {
+    const STATUSES = ["new", "paid", "shipped", "completed"];
+
+    const init = () => {
+      const root = document.querySelector("[data-admin-orders]");
+      if (!root) return false;
+
+      const form = root.querySelector("[data-admin-controls]");
+      const list = root.querySelector("[data-admin-list]");
+      if (!form || !list) return true;
+
+      const money = (value) => `$${Number(value || 0).toFixed(2)}`;
+      const date = (value) =>
+        new Date(value).toLocaleString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+      const getFormState = () => {
+        const data = new FormData(form);
+        return {
+          limit: Math.min(Math.max(Number(data.get("limit") || 30), 1), 100),
+        };
+      };
+
+      const render = (orders) => {
+        if (!orders.length) {
+          list.innerHTML = `<p>No orders found.</p>`;
+          return;
+        }
+
+        list.innerHTML = orders
+          .map(
+            (order) => `
+            <article class="admin-order-card" data-order-id="${order.id}">
+              <div class="admin-order-card__top">
+                <div>
+                  <h2>Order #${order.id.slice(0, 8)}</h2>
+                  <p>${date(order.created_at)} · ${order.email}</p>
+                </div>
+                <strong>${money(order.total)}</strong>
+              </div>
+
+              <div class="admin-order-card__bottom">
+                <label>
+                  Status
+                  <select data-status-select>
+                    ${STATUSES.map((item) => `<option value="${item}" ${item === (order.status || "new") ? "selected" : ""}>${item}</option>`).join("")}
+                  </select>
+                </label>
+                <button class="c-button" type="button" data-save-status>Save</button>
+              </div>
+
+              <ul class="admin-order-card__items">
+                ${(order.order_items || [])
+                  .map(
+                    (item) => `
+                    <li>
+                      <span>${item.product_name} x${item.qty}</span>
+                      <strong>${money(item.line_total)}</strong>
+                    </li>
+                  `
+                  )
+                  .join("")}
+              </ul>
+
+              <p class="admin-order-card__message" data-status-message></p>
+            </article>
+          `
+          )
+          .join("");
+      };
+
+      const loadOrders = async () => {
+        const { limit } = getFormState();
+        list.innerHTML = `<p>Loading orders...</p>`;
+
+        try {
+          const response = await fetch(`/api/orders?limit=${limit}`);
+          if (!response.ok) throw new Error("Failed to load orders");
+          const data = await response.json();
+          render(Array.isArray(data.orders) ? data.orders : []);
+        } catch (error) {
+          console.error(error);
+          list.innerHTML = `<p>Unable to load orders.</p>`;
+        }
+      };
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        loadOrders();
+      });
+
+      list.addEventListener("click", async (event) => {
+        const saveBtn = event.target.closest("[data-save-status]");
+        if (!saveBtn) return;
+
+        const card = saveBtn.closest("[data-order-id]");
+        if (!card) return;
+
+        const orderId = card.getAttribute("data-order-id");
+        const status = card.querySelector("[data-status-select]")?.value;
+        const message = card.querySelector("[data-status-message]");
+        if (!orderId || !status || !message) return;
+
+        saveBtn.setAttribute("disabled", "true");
+        message.textContent = "Saving...";
+
+        try {
+          const response = await fetch("/api/orders", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId, status }),
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || "Update failed");
+          }
+          message.textContent = `Saved: ${data.order.status}`;
+        } catch (error) {
+          message.textContent = error instanceof Error ? error.message : "Update failed";
+        } finally {
+          saveBtn.removeAttribute("disabled");
+        }
+      });
+
+      loadOrders();
+      return true;
+    };
+
+    if (!init()) {
+      window.addEventListener("DOMContentLoaded", init, { once: true });
+    }
+  })();
+</script>

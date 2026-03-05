@@ -1,6 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AccountSidebar from "../components/AccountSidebar.astro";
+import { getSessionUser } from "../lib/auth";
+
+const user = getSessionUser(Astro.cookies);
+if (!user) {
+  return Astro.redirect("/?auth=login");
+}
 ---
 
 <Layout title="My Account | GreenShop" description="Manage your account settings and profile details." pathname="/my-account">

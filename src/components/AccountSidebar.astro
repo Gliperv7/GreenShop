@@ -1,6 +1,6 @@
 ---
 interface Props {
-  active: "Account Details" | "Address";
+  active: "Account Details" | "Address" | "Orders";
 }
 
 const { active } = Astro.props;
@@ -8,7 +8,7 @@ const { active } = Astro.props;
 const items = [
   { label: "Account Details", href: "/my-account", icon: "user" },
   { label: "Address", href: "/address", icon: "location" },
-  { label: "Orders", href: "/my-account", icon: "cart" },
+  { label: "Orders", href: "/orders", icon: "cart" },
   { label: "Wishlist", href: "/my-account", icon: "heart" },
   { label: "Reports", href: "/my-account", icon: "clock" },
   { label: "Downloads", href: "/my-account", icon: "download" },
@@ -41,10 +41,10 @@ const paths = {
       </li>
     ))}
   </ul>
-  <a class="account-sidebar__logout" href="#" data-open-login-modal="login">
+  <button class="account-sidebar__logout" type="button" data-logout-btn>
     <svg class="account-sidebar__icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d={paths.logout} stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/>
     </svg>
     Logout
-  </a>
+  </button>
 </aside>

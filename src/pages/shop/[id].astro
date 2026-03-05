@@ -11,7 +11,7 @@ export function getStaticPaths() {
   }));
 }
 
-const { productId } = Astro.props;
+const productId = Astro.params.id ?? Astro.props.productId;
 const product = productById.get(productId);
 
 if (!product) {

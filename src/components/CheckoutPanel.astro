@@ -183,7 +183,7 @@
         checked?.closest(".checkout__pay")?.classList.add("checkout__pay--active");
       });
 
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!form.checkValidity()) {
           form.reportValidity();
@@ -197,12 +197,24 @@
         }
 
         const totals = window.GreenShopCart.getTotals();
+        const customer = Object.fromEntries(new FormData(form).entries());
+        const payment =
+          root.querySelector("input[name='payment']:checked")?.value || "cod";
         const payload = {
-          customer: Object.fromEntries(new FormData(form).entries()),
+          customer: { ...customer, payment },
           items,
           totals,
           createdAt: new Date().toISOString(),
         };
+
+        if (window.GreenShopDB?.enabled) {
+          try {
+            const remote = await window.GreenShopDB.createOrder(payload);
+            if (remote?.orderId) payload.remoteOrderId = remote.orderId;
+          } catch (error) {
+            console.error("Order sync failed:", error);
+          }
+        }
 
         localStorage.setItem("greenshop-last-order", JSON.stringify(payload));
         window.GreenShopCart.clear();
