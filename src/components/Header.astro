@@ -43,6 +43,30 @@ const { currentPath, user = null } = Astro.props;
             </a>
           </li>
         ))}
+        {user?.role === "admin" && (
+          <>
+            <li class="site-nav__mobile-only">
+              <a href="/admin-orders" class="site-nav__link">Admin Orders</a>
+            </li>
+            <li class="site-nav__mobile-only">
+              <a href="/admin-products" class="site-nav__link">Admin Products</a>
+            </li>
+          </>
+        )}
+        {user ? (
+          <>
+            <li class="site-nav__mobile-only">
+              <a href="/my-account" class="site-nav__link">My Account</a>
+            </li>
+            <li class="site-nav__mobile-only">
+              <button class="site-nav__action-btn" type="button" data-logout-btn>Logout</button>
+            </li>
+          </>
+        ) : (
+          <li class="site-nav__mobile-only">
+            <button class="site-nav__action-btn" type="button" data-open-login-modal="login">Login</button>
+          </li>
+        )}
       </ul>
     </nav>
 
@@ -52,6 +76,11 @@ const { currentPath, user = null } = Astro.props;
         <img src="/assets/figma/icons/shopping-1-4-201.svg" alt="Cart" width="20" height="20" />
         <span class="site-header__cart-count" data-cart-count>0</span>
       </a>
+      {user ? (
+        <a class="c-button c-button--ghost site-header__account-mobile" href="/my-account">Account</a>
+      ) : (
+        <button class="c-button site-header__login-mobile" type="button" data-open-login-modal="login">Login</button>
+      )}
       {
         user ? (
           <div class="site-header__auth">
@@ -123,13 +152,15 @@ const { currentPath, user = null } = Astro.props;
     renderCartCount();
     window.addEventListener("greenshop:cart-change", renderCartCount);
 
-    const logoutBtn = header.querySelector("[data-logout-btn]");
-    logoutBtn?.addEventListener("click", async () => {
-      try {
-        await fetch("/api/auth/logout", { method: "POST" });
-      } finally {
-        window.location.href = "/";
-      }
+    const logoutButtons = Array.from(header.querySelectorAll("[data-logout-btn]"));
+    logoutButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        try {
+          await fetch("/api/auth/logout", { method: "POST" });
+        } finally {
+          window.location.href = "/";
+        }
+      });
     });
 
     const authNote = header.querySelector("[data-auth-note]");
