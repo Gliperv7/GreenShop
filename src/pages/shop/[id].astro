@@ -2,22 +2,16 @@
 import Layout from "../../layouts/Layout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import ProductGrid from "../../components/ProductGrid.astro";
-import { productById, products } from "../../data/products";
+import { getProductById, getProducts } from "../../data/products";
 
-export function getStaticPaths() {
-  return products.map((product) => ({
-    params: { id: product.id },
-    props: { productId: product.id },
-  }));
-}
-
-const productId = Astro.params.id ?? Astro.props.productId;
-const product = productById.get(productId);
+const productId = String(Astro.params.id || "");
+const product = await getProductById(productId);
 
 if (!product) {
-  throw new Error(`Product not found: ${productId}`);
+  return Astro.redirect("/shop");
 }
 
+const products = await getProducts();
 const related = products.filter((item) => item.id !== product.id).slice(0, 5);
 const gallery = [product.image, related[0]?.image ?? product.image, related[1]?.image ?? product.image, related[2]?.image ?? product.image];
 const structuredData = {

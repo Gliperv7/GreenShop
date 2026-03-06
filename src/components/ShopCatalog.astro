@@ -1,6 +1,8 @@
 ---
 import ProductCard from "./ProductCard.astro";
-import { products } from "../data/products";
+import { getProducts } from "../data/products";
+
+const products = await getProducts();
 
 const categories = [
   ["All", products.length],
@@ -8,6 +10,9 @@ const categories = [
   ["Seeds", products.filter((item) => item.category === "Seeds").length],
   ["Accessories", products.filter((item) => item.category === "Accessories").length],
 ] as const;
+const prices = products.map((item) => item.price);
+const minPrice = prices.length ? Math.min(...prices) : 0;
+const maxPrice = prices.length ? Math.max(...prices) : 0;
 ---
 
 <section class="home-catalog" aria-label="Shop catalog">
@@ -33,8 +38,8 @@ const categories = [
 
     <h3 class="catalog-sidebar__subtitle">Price Range</h3>
     <label class="catalog-sidebar__price-range">
-      <span>Max price: <strong id="shop-price-value">$229</strong></span>
-      <input id="shop-price" type="range" min="39" max="229" value="229" />
+      <span>Max price: <strong id="shop-price-value">${maxPrice}</strong></span>
+      <input id="shop-price" type="range" min={minPrice} max={maxPrice} value={maxPrice} />
     </label>
 
     <h3 class="catalog-sidebar__subtitle">Size</h3>

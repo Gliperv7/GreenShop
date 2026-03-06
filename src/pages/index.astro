@@ -5,7 +5,9 @@ import HomeCatalog from "../components/HomeCatalog.astro";
 import PromoCards from "../components/PromoCards.astro";
 import BlogPreview from "../components/BlogPreview.astro";
 import Newsletter from "../components/Newsletter.astro";
-import { products } from "../data/products";
+import { getProducts } from "../data/products";
+
+const products = await getProducts();
 
 const homepageStructuredData = [
   {

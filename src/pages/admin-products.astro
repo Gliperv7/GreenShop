@@ -1,0 +1,189 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSessionUser } from "../lib/auth";
+
+const user = getSessionUser(Astro.cookies);
+if (!user || user.role !== "admin") {
+  return Astro.redirect("/?auth=login");
+}
+---
+
+<Layout title="Admin Products | GreenShop" description="Manage catalog products." pathname="/admin-products">
+  <section class="l-container admin-products" data-admin-products>
+    <header class="admin-products__head">
+      <h1>Products Admin</h1>
+      <p class="section-heading__text">Create new products and delete existing ones.</p>
+    </header>
+
+    <form class="admin-products__form" data-products-form>
+      <label>
+        Name
+        <input name="name" required minlength="2" />
+      </label>
+      <label>
+        Category
+        <select name="category" required>
+          <option value="Plants">Plants</option>
+          <option value="Seeds">Seeds</option>
+          <option value="Accessories">Accessories</option>
+        </select>
+      </label>
+      <label>
+        Size
+        <select name="size" required>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+        </select>
+      </label>
+      <label>
+        Price
+        <input name="price" type="number" min="1" step="0.01" required />
+      </label>
+      <label>
+        Old price (optional)
+        <input name="oldPrice" type="number" min="1" step="0.01" />
+      </label>
+      <label>
+        SKU
+        <input name="sku" required minlength="3" />
+      </label>
+      <label>
+        Badge (optional)
+        <select name="badge">
+          <option value="">None</option>
+          <option value="New">New</option>
+          <option value="Sale">Sale</option>
+        </select>
+      </label>
+      <label>
+        Image URL
+        <input name="image" required placeholder="/assets/..." />
+      </label>
+      <label class="admin-products__field admin-products__field--full">
+        Description
+        <textarea name="description" rows="3" required></textarea>
+      </label>
+      <div class="admin-products__field admin-products__field--full admin-products__actions">
+        <button class="c-button" type="submit">Add Product</button>
+        <p data-products-message></p>
+      </div>
+    </form>
+
+    <div class="admin-products__list" data-products-list>
+      <p>Loading products...</p>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-admin-products]");
+    if (!root) return;
+
+    const form = root.querySelector("[data-products-form]");
+    const list = root.querySelector("[data-products-list]");
+    const message = root.querySelector("[data-products-message]");
+    if (!form || !list || !message) return;
+
+    const money = (value) => `$${Number(value || 0).toFixed(2)}`;
+
+    const render = (products) => {
+      if (!products.length) {
+        list.innerHTML = "<p>No products found.</p>";
+        return;
+      }
+
+      list.innerHTML = products
+        .map(
+          (product) => `
+            <article class="admin-product-card" data-product-id="${product.id}">
+              <div>
+                <h2>${product.name}</h2>
+                <p>${product.category} · ${product.size} · SKU ${product.sku}</p>
+              </div>
+              <div class="admin-product-card__meta">
+                <strong>${money(product.price)}</strong>
+                <button class="c-button c-button--ghost" type="button" data-delete-product>Delete</button>
+              </div>
+            </article>
+          `
+        )
+        .join("");
+    };
+
+    const loadProducts = async () => {
+      list.innerHTML = "<p>Loading products...</p>";
+      try {
+        const response = await fetch("/api/products");
+        if (!response.ok) throw new Error("Failed to load products");
+        const data = await response.json();
+        render(Array.isArray(data.products) ? data.products : []);
+      } catch (error) {
+        list.innerHTML = `<p>${error instanceof Error ? error.message : "Failed to load products"}</p>`;
+      }
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const payload = {
+        name: String(data.get("name") || ""),
+        category: String(data.get("category") || ""),
+        size: String(data.get("size") || ""),
+        price: Number(data.get("price") || 0),
+        oldPrice: data.get("oldPrice") ? Number(data.get("oldPrice")) : undefined,
+        sku: String(data.get("sku") || ""),
+        badge: String(data.get("badge") || ""),
+        image: String(data.get("image") || ""),
+        description: String(data.get("description") || ""),
+      };
+
+      message.textContent = "Saving...";
+
+      try {
+        const response = await fetch("/api/products", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Failed to add product");
+        message.textContent = `Added: ${result.product.name}`;
+        form.reset();
+        await loadProducts();
+      } catch (error) {
+        message.textContent = error instanceof Error ? error.message : "Failed to add product";
+      }
+    });
+
+    list.addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-delete-product]");
+      if (!button) return;
+
+      const card = button.closest("[data-product-id]");
+      const id = card?.getAttribute("data-product-id");
+      if (!id) return;
+
+      button.setAttribute("disabled", "true");
+
+      try {
+        const response = await fetch(`/api/products?id=${encodeURIComponent(id)}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Failed to delete product");
+        message.textContent = `Deleted: ${id}`;
+        await loadProducts();
+      } catch (error) {
+        message.textContent = error instanceof Error ? error.message : "Failed to delete product";
+      } finally {
+        button.removeAttribute("disabled");
+      }
+    });
+
+    loadProducts();
+  })();
+</script>

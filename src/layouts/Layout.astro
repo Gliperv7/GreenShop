@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import LoginModal from "../components/LoginModal.astro";
-import { products } from "../data/products";
+import { getProducts } from "../data/products";
 import { cartItems as defaultCartItems } from "../data/cart";
 import { getSessionUser } from "../lib/auth";
 import "../styles/tokens.css";
@@ -30,6 +30,7 @@ const {
   hideFooter = false,
 } = Astro.props;
 const sessionUser = getSessionUser(Astro.cookies);
+const products = await getProducts();
 
 const siteName = "GreenShop";
 const siteUrl = "https://greenshop.example";

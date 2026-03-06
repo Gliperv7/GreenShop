@@ -47,9 +47,24 @@ create table if not exists public.app_users (
   role text not null default 'user' check (role in ('user', 'admin'))
 );
 
+create table if not exists public.app_products (
+  id text primary key,
+  created_at timestamptz not null default now(),
+  name text not null,
+  category text not null check (category in ('Plants', 'Seeds', 'Accessories')),
+  size text not null check (size in ('S', 'M', 'L')),
+  price numeric(12,2) not null check (price > 0),
+  old_price numeric(12,2),
+  image text not null,
+  badge text check (badge in ('Sale', 'New')),
+  description text not null,
+  sku text not null unique
+);
+
 alter table public.orders enable row level security;
 alter table public.order_items enable row level security;
 alter table public.app_users enable row level security;
+alter table public.app_products enable row level security;
 
 -- Demo/public mode for checkout without auth.
 drop policy if exists "anon_insert_orders" on public.orders;
@@ -84,6 +99,14 @@ create policy "anon_select_order_items"
 drop policy if exists "deny_public_app_users" on public.app_users;
 create policy "deny_public_app_users"
   on public.app_users
+  for all
+  to anon, authenticated
+  using (false)
+  with check (false);
+
+drop policy if exists "deny_public_app_products" on public.app_products;
+create policy "deny_public_app_products"
+  on public.app_products
   for all
   to anon, authenticated
   using (false)

@@ -56,7 +56,10 @@ const { currentPath, user = null } = Astro.props;
         user ? (
           <div class="site-header__auth">
             {user.role === "admin" && (
-              <a class="site-header__role-link" href="/admin-orders" aria-label="Admin orders">Admin</a>
+              <span class="site-header__admin-links">
+                <a class="site-header__role-link" href="/admin-orders" aria-label="Admin orders">Orders</a>
+                <a class="site-header__role-link" href="/admin-products" aria-label="Admin products">Products</a>
+              </span>
             )}
             <a class="site-header__user-link" href="/my-account" aria-label="My account">
               <span class="site-header__user-name">Hi, {user.name}</span>

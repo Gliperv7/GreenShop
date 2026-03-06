@@ -3,7 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProductDetail from "../components/ProductDetail.astro";
 import ProductGrid from "../components/ProductGrid.astro";
-import { products } from "../data/products";
+import { getProducts } from "../data/products";
+
+const products = await getProducts();
 ---
 
 <Layout

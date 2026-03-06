@@ -1,6 +1,8 @@
 ---
 import ProductCard from "./ProductCard.astro";
-import { products } from "../data/products";
+import { getProducts } from "../data/products";
+
+const products = await getProducts();
 
 const categories = [
   { label: "All", value: "All" as const },
@@ -9,8 +11,9 @@ const categories = [
   { label: "Accessories", value: "Accessories" as const },
 ];
 
-const priceMin = Math.min(...products.map((item) => item.price));
-const priceMax = Math.max(...products.map((item) => item.price));
+const prices = products.map((item) => item.price);
+const priceMin = prices.length ? Math.min(...prices) : 0;
+const priceMax = prices.length ? Math.max(...prices) : 0;
 
 const sizeCounts = {
   S: products.filter((item) => item.size === "S").length,
@@ -89,7 +92,7 @@ const sizeCounts = {
       </label>
     </div>
 
-    <p class="section-heading__text" data-home-results data-testid="home-results-count">8 products found</p>
+    <p class="section-heading__text" data-home-results data-testid="home-results-count">{products.length} products found</p>
 
     <div class="l-grid l-grid--products" data-home-grid>
       {products.map((product) => <ProductCard product={product} />)}

@@ -3,7 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import CartTable from "../components/CartTable.astro";
 import ProductGrid from "../components/ProductGrid.astro";
-import { products } from "../data/products";
+import { getProducts } from "../data/products";
+
+const products = await getProducts();
 
 const structuredData = {
   "@context": "https://schema.org",
